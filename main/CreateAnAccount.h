@@ -11,5 +11,5 @@ public:
 	CreateAnAccount();
 	void displayMessage() override;
 	void displayMenu() override;
-	bool checkFolderCharacters(string);
+	bool checkMenuOption(string&, menuType&);
 };

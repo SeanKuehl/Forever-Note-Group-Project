@@ -30,6 +30,12 @@
     <ClCompile Include="Navigation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CategoryMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoteMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
@@ -45,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="menuType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CategoryMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoteMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

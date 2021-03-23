@@ -16,3 +16,13 @@ void Login::displayMenu() {
 	cout << "Password: ";
 	cin >> this->password;
 }
+
+bool Login::checkMenuOption(string& path, menuType& mType) {
+	path = this->username;
+	mType = menuType::CategoryMenu;
+	return true;
+}
+
+//string getUserName() {
+//	return "";
+//}

@@ -7,7 +7,7 @@ CreateAnAccount::CreateAnAccount() : Menu() {
 
 void CreateAnAccount::displayMessage() {
 	system("cls");
-	cout << "Please Create an Account: " << endl << endl;
+	cout << "Create an Account: " << endl << endl;
 }
 
 void CreateAnAccount::displayMenu() {
@@ -26,7 +26,7 @@ void CreateAnAccount::displayMenu() {
 		return;
 	}
 
-	cout << "Please Re-Enter a Username: ";
+	cout << "Please Re-Enter Your Username: ";
 	cin >> reUsername;
 
 	if (username.compare(reUsername) == 0) {
@@ -61,21 +61,10 @@ void CreateAnAccount::displayMenu() {
 	}
 }
 
-bool CreateAnAccount::checkFolderCharacters(string cred) {
-	for (int i = 0; i < cred.length(); i++) {
-		//invalid folder creation characters
-		if (cred[i] == '.' || 
-			cred[i] == '\\' ||
-			cred[i] == '/' ||
-			cred[i] == ':' ||
-			cred[i] == '*' ||
-			cred[i] == '?' ||
-			cred[i] == '"' ||
-			cred[i] == '<' ||
-			cred[i] == '>' || 
-			cred[i] == '|'){
-			return false;
-		}
-	}
+
+
+bool CreateAnAccount::checkMenuOption(string& path,menuType& mType) {
+	path = this->username;
+	mType = menuType::CategoryMenu;
 	return true;
 }

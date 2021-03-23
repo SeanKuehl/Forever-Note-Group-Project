@@ -14,7 +14,8 @@ void Menu::displayMenu() {
 		 << "3) Exit" << endl;
 }
 
-bool Menu::checkMenuOption(menuType &mType) {
+bool Menu::checkMenuOption(string& path, menuType &mType) {
+	cout << endl << ":";
 	cin >> menuOption;
 	checkValidInput();
 	do {
@@ -29,7 +30,7 @@ bool Menu::checkMenuOption(menuType &mType) {
 			return true;
 		case 3:
 			//Exit
-			return false;
+			exit(EXIT_SUCCESS);
 		default:
 			system("cls");
 			cout << "Please Enter a Valid Option: " << endl << endl;
@@ -41,7 +42,7 @@ bool Menu::checkMenuOption(menuType &mType) {
 	} while (true);
 }
 
-void checkValidInput() {
+void Menu::checkValidInput() {
 	if (cin.fail()) {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -49,3 +50,21 @@ void checkValidInput() {
 	
 }
 
+bool Menu::checkFolderCharacters(string cred) {
+	for (int i = 0; i < cred.length(); i++) {
+		//invalid folder creation characters
+		if (cred[i] == '.' ||
+			cred[i] == '\\' ||
+			cred[i] == '/' ||
+			cred[i] == ':' ||
+			cred[i] == '*' ||
+			cred[i] == '?' ||
+			cred[i] == '"' ||
+			cred[i] == '<' ||
+			cred[i] == '>' ||
+			cred[i] == '|') {
+			return false;
+		}
+	}
+	return true;
+}

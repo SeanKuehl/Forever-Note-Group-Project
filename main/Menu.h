@@ -8,14 +8,15 @@ class Menu {
 protected:
 	int menuOption;
 
+	void checkValidInput();
+	bool checkFolderCharacters(string);
+
 public:
 	Menu();
 	virtual void displayMessage();
 	virtual void displayMenu();
-	virtual bool checkMenuOption(menuType&);
+	virtual bool checkMenuOption(string&, menuType&);
 	
 };
 
-void checkValidInput();
-
-//void displayMainMenu();
+//void checkValidInput();

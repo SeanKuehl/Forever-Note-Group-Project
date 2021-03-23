@@ -9,17 +9,22 @@ int main() {
 
 	Menu* m = new Menu;
 	menuType mType = menuType::mMenu;
+	string path = "";
 
 	m->displayMessage();
 	m->displayMenu();
+	m->checkMenuOption(path, mType);
 
-	if (m->checkMenuOption(mType)) {
+	do {
 		selectMenu(mType, &m);
 		m->displayMessage();
 		m->displayMenu();
-	} else {
-		exitApplication(m);
-	}
+
+		if (!(m->checkMenuOption(path, mType))) {
+			exitApplication(m);
+		}
+
+	} while (true);
 
 	return 0;
 

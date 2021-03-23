@@ -4,13 +4,10 @@
 #include <string>
 using namespace std;
 
-class Login: public Menu {
-	string username;
-	string password;
+class NoteMenu : public Menu {
 public:
-	Login();
+	NoteMenu();
 	void displayMessage() override;
 	void displayMenu() override;
-	bool checkMenuOption(string&, menuType&);
-	//friend string getUserName();
+	bool checkMenuOption(string&, menuType&) override;
 };

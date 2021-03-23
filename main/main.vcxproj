@@ -139,18 +139,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CategoryMenu.cpp" />
     <ClCompile Include="CreateAnAccount.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Navigation.cpp" />
+    <ClCompile Include="NoteMenu.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CategoryMenu.h" />
     <ClInclude Include="CreateAnAccount.h" />
     <ClInclude Include="Login.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="menuType.h" />
     <ClInclude Include="Navigation.h" />
+    <ClInclude Include="NoteMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

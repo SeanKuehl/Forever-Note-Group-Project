@@ -7,12 +7,16 @@ void selectMenu(menuType type, Menu** m) {
 		*m = new Menu;
 		break;
 	case menuType::Login:
-		//mTemp = new Login;
 		*m = new Login;
 		break;
 	case menuType::CreateAnAccount:
 		*m = new CreateAnAccount;
 		break;
+	case menuType::CategoryMenu:
+		*m = new CategoryMenu;
+		break;
+	case menuType::NoteMenu:
+		*m = new NoteMenu;
 	default:
 		break;
 	}
@@ -20,6 +24,6 @@ void selectMenu(menuType type, Menu** m) {
 
 void exitApplication(Menu* m) {
 	delete m;
-	cout << "Good-Bye!" << endl;
+	cout << endl << "Good-Bye!" << endl;
 	exit(EXIT_SUCCESS);
 }
