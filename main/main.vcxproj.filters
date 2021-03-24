@@ -30,6 +30,9 @@
     <ClCompile Include="LogIntoAccount.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ListAllInDirectory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Encryption.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LogIntoAccount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListAllInDirectory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
