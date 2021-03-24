@@ -18,7 +18,7 @@ namespace fs = std::experimental::filesystem;
 
 using namespace std;
 
-
+//I don't think I can test this
 string get_current_dir() {
     char buff[FILENAME_MAX]; //create string buffer to hold path
     GetCurrentDir(buff, FILENAME_MAX);
@@ -96,6 +96,84 @@ vector<string> GetNotesInDirectory(string path) {
 
     //in other things like within a category we made this won't be a problem
     //we should use .txt to seperate notes and categories
+
+    return toReturn;
+}
+
+
+
+
+
+
+vector<string> GetNotesInDirectoryTestingStub(vector<string> files) {
+
+    string fileName;
+    vector<string> toReturn;
+
+    for (int i = 0; i < files.size(); i++) {
+        fileName = files.at(i);
+
+        if (fileName.find('.') < fileName.size()) {
+            //it's a file and a '.' was found
+            if (fileName.find(".note") < fileName.size()) {
+                //it's a note file we want to use and show to user
+                toReturn.push_back(fileName);
+            }
+        }
+        else {
+            //it's a categoriy and a '.' was not found
+
+
+        }
+
+    }
+
+    //for users, there'll be a problem where there are unwanted things in the directory,
+    //but these can be hardcoded to be removed
+
+    //in other things like within a category we made this won't be a problem
+    //we should use .txt to seperate notes and categories
+
+
+    
+
+    return toReturn;
+}
+
+
+
+
+vector<string> GetCategoriesInDirectoryTestingStub(vector<string> files) {
+
+    string fileName;
+    vector<string> toReturn;
+
+    for (int i = 0; i < files.size(); i++) {
+        fileName = files.at(i);
+
+        if (fileName.find('.') < fileName.size()) {
+            //it's a file and a '.' was found
+            if (fileName.find(".note") < fileName.size()) {
+                //it's a note file we want to use and show to user
+                
+            }
+        }
+        else {
+            //it's a categoriy and a '.' was not found
+            toReturn.push_back(fileName);
+
+        }
+
+    }
+
+    //for users, there'll be a problem where there are unwanted things in the directory,
+    //but these can be hardcoded to be removed
+
+    //in other things like within a category we made this won't be a problem
+    //we should use .txt to seperate notes and categories
+
+
+
 
     return toReturn;
 }

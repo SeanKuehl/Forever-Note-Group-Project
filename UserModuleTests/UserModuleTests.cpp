@@ -8,6 +8,7 @@
 #include "Password.h"
 #include "CreateAccount.h"
 #include "LogIntoAccount.h"
+#include "ListAllInDirectory.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std;
@@ -592,6 +593,163 @@ namespace UserModuleTests
 
 
 		
+
+
+
+
+
+
+
+
+	};
+
+
+
+
+	TEST_CLASS(ListAllInDirectoryTests)
+	{
+		
+	public:
+		//notes have the .note extension, folders don't have a . in their name
+		TEST_METHOD(T026_GetNotesInDirectoryTestingStub_JustFolders________0)
+		{
+			
+			//arrange, act, assert
+			
+			vector<string> input = { "thisfolder", "thatfolder", "anotherfolder" };
+			int expected = 0;
+			int actual = -1;
+			vector<string> outputHolder;
+			
+
+			outputHolder = GetNotesInDirectoryTestingStub(input);	//the func should return a vector<string> with a size of 0, empty
+
+			actual = outputHolder.size();
+
+			
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+		TEST_METHOD(T027_GetNotesInDirectoryTestingStub_ThreeNotesButOnlyOneReal________1)
+		{
+
+			//arrange, act, assert
+
+			vector<string> input = { "love.", "war.note", "peace.not" };	
+			int expected = 1;
+			int actual = -1;
+			vector<string> outputHolder;
+
+
+			outputHolder = GetNotesInDirectoryTestingStub(input);	//it should only recognize one as a real note
+
+			actual = outputHolder.size();
+
+
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+
+		TEST_METHOD(T028_GetNotesInDirectoryTestingStub_MiscExtensions________0)
+		{
+
+			//arrange, act, assert
+
+			vector<string> input = { "love.cpp", "war.h", "peace.sln", "friday.txt" };
+			int expected = 0;
+			int actual = -1;
+			vector<string> outputHolder;
+
+
+			outputHolder = GetNotesInDirectoryTestingStub(input);	//it should kick out all of these extensions because they're not .note
+
+			actual = outputHolder.size();
+
+
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+
+		TEST_METHOD(T029_GetCategoriesInDirectoryTestingStub_MiscExtensionsIncludingNote________0)
+		{
+
+			//arrange, act, assert
+
+			vector<string> input = { "love.cpp", "war.h", "peace.sln", "friday.txt", "me.note" };
+			int expected = 0;
+			int actual = -1;
+			vector<string> outputHolder;
+
+
+			outputHolder = GetCategoriesInDirectoryTestingStub(input);	
+
+			actual = outputHolder.size();
+
+
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+		TEST_METHOD(T030_GetCategoriesInDirectoryTestingStub_AlmostNotes________0)
+		{
+
+			//arrange, act, assert
+
+			vector<string> input = { "love.", "war.n", "peace.no", "friday.not" };
+			int expected = 0;
+			int actual = -1;
+			vector<string> outputHolder;
+
+
+			outputHolder = GetCategoriesInDirectoryTestingStub(input);
+
+			actual = outputHolder.size();
+
+
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+		TEST_METHOD(T031_GetCategoriesInDirectoryTestingStub_NotesAndFolders________2)
+		{
+
+			//arrange, act, assert
+
+			vector<string> input = { "love.note", "notAFolderNote", "peace.note", "TotallyFolderNote" };
+			int expected = 2;
+			int actual = -1;
+			vector<string> outputHolder;
+
+
+			outputHolder = GetCategoriesInDirectoryTestingStub(input);
+
+			actual = outputHolder.size();
+
+
+
+			Assert::AreEqual(expected, actual);
+
+		}
+
+
+
+
+
+
+
 
 
 
