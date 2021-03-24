@@ -5,8 +5,10 @@
 #include <iomanip>
 #include <vector>
 #include "Note.h"
+#include "Windows.h"
 
 //private constants
+const string Note::tempFileName = "tmp.txt";
 const string Note::openingBrackets = "{{";
 const string Note::closingBrackets = "}}";
 const char Note::encryptionChar = '#';
@@ -29,6 +31,47 @@ Note::Note(string title, string contents, bool isEncrypted, string password)
 void Note::SetPath(string path)
 {
 	this->path = path;
+}
+
+void Note::WritetoFile()
+{
+	fstream fileStream;
+	fileStream.open(this->path, ios::out);
+	if (fileStream.is_open())
+	{
+		if (this->isEncrypted)
+		{
+			//call encryption
+			vector<string> noteStrings;
+			noteStrings.push_back(this->title);
+			noteStrings.push_back(this->contents);
+			if (this->isPasswordProtected)
+			{
+				noteStrings.push_back(this->password);
+			}
+
+			vector<string> encryptedStrings = noteStrings;
+			encryptedStrings.push_back("!@#"); //remove this
+			//vector<string> encryptedStrings = Encrypt(noteStrings);
+			string encrytionKey = encryptedStrings.back();
+			fileStream << "#" << encrytionKey << endl;
+			for (vector<string>::iterator i = encryptedStrings.begin(); i != encryptedStrings.end() - 1; i++)
+			{
+				fileStream << openingBrackets << *i << closingBrackets << endl;
+			}
+		}
+		else
+		{
+			fileStream << openingBrackets << this->title << closingBrackets << endl;
+			fileStream << openingBrackets << this->contents << closingBrackets << endl;
+			if (this->isPasswordProtected)
+			{
+				fileStream << openingBrackets << this->password << closingBrackets << endl;
+			}
+		}
+
+		fileStream.close();
+	}
 }
 
 void Note::ReadNoteField(string temp, string& field, fstream& fileStream)
@@ -175,7 +218,6 @@ Note Note::Open(string filePath)
 
 void Note::WritetoFile(string directoryPath)
 {
-	fstream fileStream;
 	time_t now = time(0);
 	tm* timeStruct = new tm;
 	localtime_s(timeStruct, &now);
@@ -187,42 +229,55 @@ void Note::WritetoFile(string directoryPath)
 		<< setw(2) << setfill('0') << timeStruct->tm_min << setw(2) << setfill('0') << timeStruct->tm_sec << ".note";
 	this->path = stream.str();
 
-	fileStream.open(this->path, ios::out);
+	//actually write to file using this->path
+	WritetoFile();
+}
+
+void Note::Edit()
+{
+	//create temp text file with contents
+	fstream fileStream;
+	fileStream.open(tempFileName, ios::out);
 	if (fileStream.is_open())
 	{
-		if (this->isEncrypted)
-		{
-			//call encryption
-			vector<string> noteStrings;
-			noteStrings.push_back(this->title);
-			noteStrings.push_back(this->contents);
-			if (this->isPasswordProtected)
-			{
-				noteStrings.push_back(this->password);
-			}
-
-			vector<string> encryptedStrings = noteStrings;
-			encryptedStrings.push_back("!@#"); //remove this
-			//vector<string> encryptedStrings = Encrypt(noteStrings);
-			string encrytionKey = encryptedStrings.back();
-			fileStream << "#" << encrytionKey << endl;
-			for (vector<string>::iterator i = encryptedStrings.begin(); i != encryptedStrings.end() - 1; i++)
-			{
-				fileStream << openingBrackets << *i << closingBrackets << endl;
-			}
-		}
-		else
-		{
-			fileStream << openingBrackets << this->title << closingBrackets << endl;
-			fileStream << openingBrackets << this->contents << closingBrackets << endl;
-			if (this->isPasswordProtected)
-			{
-				fileStream << openingBrackets << this->password << closingBrackets << endl;
-			}
-		}
-
-		fileStream.close();
+		fileStream << this->contents;
 	}
+	fileStream.close();
+
+	//Open temp file in text editor
+	//convert for 'wide' characters (unicode rather than ascii)
+	wstring wFileName = wstring(tempFileName.begin(), tempFileName.end());
+
+	//Adapted from https://docs.microsoft.com/en-us/windows/win32/shell/launch
+	SHELLEXECUTEINFO ShExecInfo = { 0 };
+	ShExecInfo.cbSize = sizeof(SHELLEXECUTEINFO);
+	ShExecInfo.fMask = SEE_MASK_NOCLOSEPROCESS;
+	ShExecInfo.hwnd = NULL;
+	ShExecInfo.lpVerb = NULL;
+	ShExecInfo.lpFile = wFileName.c_str();
+	ShExecInfo.lpDirectory = NULL;
+	ShExecInfo.nShow = SW_SHOW;
+	ShExecInfo.hInstApp = NULL;
+	ShellExecuteEx(&ShExecInfo);
+	WaitForSingleObject(ShExecInfo.hProcess, INFINITE);
+
+	//read in text from temp file to object
+	fileStream.open(tempFileName, ios::in);
+	if (fileStream.is_open())
+	{
+		string inBuff;
+		string concatStr = "";
+		while (getline(fileStream, inBuff))
+		{
+			concatStr += inBuff;
+		}
+		this->contents = concatStr;
+	}
+	fileStream.close();
+	remove(tempFileName.c_str());
+
+	//write changes to note file
+	WritetoFile();
 }
 
 void Note::Delete()

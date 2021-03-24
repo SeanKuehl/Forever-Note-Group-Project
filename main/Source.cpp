@@ -14,6 +14,8 @@ int main() {
 	note.WritetoFile("C:\\Users\\Kevin\\Documents\\Schooling\\College 2\\Classes\\Semester 2\\CSCN71030-Proj2-Team Based Software");
 	note.Delete();
 
+
+
 	string path = "C:\\Users\\Kevin\\Documents\\Schooling\\College 2\\Classes\\Semester 2\\CSCN71030-Proj2-Team Based Software\\test.note";
 	note = Note::Open(path);
 
@@ -31,6 +33,11 @@ int main() {
 	{
 		cout << *i << " ";
 	}
+	cout << endl;
+
+	note.Edit();
+	note.GetContents(someString);
+	std::cout << someString << std::endl;
 
 	return 0;
 }

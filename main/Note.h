@@ -16,11 +16,13 @@ private:
 	bool isPasswordProtected;
 	PasswordState passwordState;
 
+	static const string tempFileName;
 	static const string openingBrackets;
 	static const string closingBrackets;
 	static const char encryptionChar;
 
 	void SetPath(string);
+	void WritetoFile();
 	static void ReadNoteField(string, string&, fstream&);
 
 public:
@@ -85,10 +87,25 @@ public:
 	/// </summary>
 	/// <param name="directoryPath"></param>
 	void WritetoFile(string);
-	//void Edit();
+	/// <summary>
+	/// Open the contents of a Note in a text editor
+	/// </summary>
+	void Edit();
+	/// <summary>
+	/// Deletes the physical Note file
+	/// </summary>
 	void Delete();
+	/// <summary>
+	/// Check a given password to the actual password
+	/// </summary>
+	/// <param password="">given password entry</param>
+	/// <returns>State of the Password after comparing to given password</returns>
 	PasswordState CheckPassword(string);
 
+	/// <summary>
+	/// Checks if the Note has contents and title
+	/// </summary>
+	/// <returns>true if title or contents are empty</returns>
 	bool IsEmptyNote();
 };
 
