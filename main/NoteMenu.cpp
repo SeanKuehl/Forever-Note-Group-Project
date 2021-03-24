@@ -33,6 +33,7 @@ bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
 			return true;
 		case 4:
 			//Go Back
+			removeCategoryFromPath(path);
 			mType = menuType::CategoryMenu;
 			return true;
 		case 5:
@@ -47,4 +48,9 @@ bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
 			break;
 		}
 	} while (true);
+}
+
+void NoteMenu::removeCategoryFromPath(string& path) {
+	int firstindexOfSlash = path.find_first_of("/");
+	path = path.substr(0, firstindexOfSlash + 1);
 }

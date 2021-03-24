@@ -10,4 +10,6 @@ public:
 	void displayMessage() override;
 	void displayMenu() override;
 	bool checkMenuOption(string&, menuType&) override;
+private:
+	void removeCategoryFromPath(string&);
 };

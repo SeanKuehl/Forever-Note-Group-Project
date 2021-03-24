@@ -12,5 +12,4 @@ public:
 	void displayMessage() override;
 	void displayMenu() override;
 	bool checkMenuOption(string&, menuType&);
-	//friend string getUserName();
 };

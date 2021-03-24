@@ -15,7 +15,7 @@ void Menu::displayMenu() {
 }
 
 bool Menu::checkMenuOption(string& path, menuType &mType) {
-	cout << endl << ":";
+	cout << endl << ": ";
 	cin >> menuOption;
 	checkValidInput();
 	do {

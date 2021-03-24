@@ -59,12 +59,22 @@ void CreateAnAccount::displayMenu() {
 		displayMenu();
 		return;
 	}
+
+	/*if (CreateAccount(this->username, this->password)) {
+		cout << "Account Creation Was Successful!" << endl;
+	} else {
+		system("cls");
+		cout << "Username Already Exists!" << endl
+			 << "Account Creation Was NOT Successful!" <<  endl;
+			 displayMenu();
+	}*/
+
 }
 
 
 
-bool CreateAnAccount::checkMenuOption(string& path,menuType& mType) {
-	path = this->username;
+bool CreateAnAccount::checkMenuOption(string& path, menuType& mType) {
+	path = this->username + "/";
 	mType = menuType::CategoryMenu;
 	return true;
 }
