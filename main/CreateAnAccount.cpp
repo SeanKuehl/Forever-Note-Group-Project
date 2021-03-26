@@ -19,7 +19,7 @@ void CreateAnAccount::displayMenu() {
 	cout << "Please Enter a Username: ";
 	cin >> username;
 
-	if (!checkFolderCharacters(username)) {
+	if (!checkCharacters(username)) {
 		displayMessage();
 		cout << "Please Use Appropriate Characters: " << endl << endl;
 		displayMenu();
@@ -41,7 +41,7 @@ void CreateAnAccount::displayMenu() {
 	cout << "Please Enter a Password: ";
 	cin >> password;
 
-	if (!checkFolderCharacters(password)) {
+	if (!checkCharacters(password)) {
 		displayMessage();
 		cout << "Please Use Appropriate Characters: " << endl << endl;
 		displayMenu();

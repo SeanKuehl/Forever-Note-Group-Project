@@ -50,7 +50,7 @@ void Menu::checkValidInput() {
 	
 }
 
-bool Menu::checkFolderCharacters(string cred) {
+bool Menu::checkCharacters(string cred) {
 	for (int i = 0; i < cred.length(); i++) {
 		//invalid folder creation characters
 		if (cred[i] == '.' ||
@@ -67,4 +67,40 @@ bool Menu::checkFolderCharacters(string cred) {
 		}
 	}
 	return true;
+}
+
+void Menu::convToUpper(string& s) {
+	for (int i = 0; i < s.size(); i++) {
+		s[i] = toupper(s[i]);
+	}
+}
+
+bool Menu::checkYesNo() {
+
+	bool yesNo = false;
+	bool validInput = false;
+
+	do {
+		string userInput;
+		cin >> userInput;
+		checkValidInput();
+		convToUpper(userInput);
+
+		//bug here
+
+		if (userInput.find("NO") != string::npos) {
+			yesNo = false;
+			validInput = true;
+		} else if (userInput.find("YES") != string::npos) {
+			cout << "Your Input Was Invalid" << endl << endl
+				 << "Please Enter Yes or No (Y/N): ";
+			validInput = false;
+		} else {
+			yesNo = true;
+			validInput = true;
+		}
+
+	} while (!validInput);
+
+	return yesNo;
 }

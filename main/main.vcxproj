@@ -145,6 +145,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Navigation.cpp" />
     <ClCompile Include="NoteMenu.cpp" />
+    <ClCompile Include="NoteModificationMenu.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="menuType.h" />
     <ClInclude Include="Navigation.h" />
     <ClInclude Include="NoteMenu.h" />
+    <ClInclude Include="NoteModificationMenu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

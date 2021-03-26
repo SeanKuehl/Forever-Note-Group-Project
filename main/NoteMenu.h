@@ -2,9 +2,17 @@
 #include "Menu.h"
 #include <iostream>
 #include <string>
+#include <vector>
+#include <Windows.h>
+
 using namespace std;
 
 class NoteMenu : public Menu {
+	string noteName;
+	string noteContent;
+	string password;
+	string noteSearch;
+	vector<string> noteList;
 public:
 	NoteMenu();
 	void displayMessage() override;
@@ -12,4 +20,11 @@ public:
 	bool checkMenuOption(string&, menuType&) override;
 private:
 	void removeCategoryFromPath(string&);
+	void createANote(string);
+	bool yesNoPassword();
+	string enterContents();
+	void selectANote(string);
+	void displayNoteOptions(vector<string>);
+	string selectNoteOption(vector<string>, int);
+	bool searchANote(string);
 };

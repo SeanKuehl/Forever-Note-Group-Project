@@ -9,8 +9,9 @@ protected:
 	int menuOption;
 
 	void checkValidInput();
-	bool checkFolderCharacters(string);
-
+	bool checkCharacters(string);
+	bool checkYesNo();
+	void convToUpper(string&);
 public:
 	Menu();
 	virtual void displayMessage();

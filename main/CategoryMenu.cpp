@@ -98,12 +98,18 @@ void CategoryMenu::createACategory(string username) {
 			 << ": ";
 		cin >> categoryName;
 		checkValidInput();
-		valid = checkFolderCharacters(categoryName);
+		valid = checkCharacters(categoryName);
 		
 	} while (!valid);
 
 	this->catName = categoryName;
-	//Category(username, categoryName)
+
+	/*if (Create_Category(username, categoryName)) {
+		cout << "Category creation was successful" << endl;
+	} else {
+		cout << "Category creation was NOT successful" << endl;
+	}*/
+	
 }
 
 void CategoryMenu::selectACategory(string username) {
@@ -151,7 +157,8 @@ void CategoryMenu::mergeACategory(string username) {
 	do {
 
 		if (catList.empty()) {
-			cout << "No Categories Exist!" << endl;
+			cout << endl << "No Categories Exist!" << endl;
+			Sleep(1000);
 			catExists = false;
 		} else {
 
@@ -196,11 +203,12 @@ void CategoryMenu::mergeACategory(string username) {
 
 bool CategoryMenu::searchACategory(string username) {
 	
+	system("cls");
+
 	do {
 
-		//system("cls");
 		cout << "Please enter a search word: " << endl << endl
-			<< ": ";
+			 << ": ";
 		string userSearch;
 		cin >> userSearch;
 		checkValidInput();
@@ -220,7 +228,8 @@ bool CategoryMenu::searchACategory(string username) {
 		}
 
 		if (searchList.empty()) {
-			cout << "No Categories Exist!" << endl;
+			cout << endl << "No Categories Exist!" << endl;
+			Sleep(1000);
 			return false;
 
 		} else {
@@ -249,8 +258,3 @@ bool CategoryMenu::searchACategory(string username) {
 
 }
 
-void CategoryMenu::convToUpper(string& s) {
-	for (int i = 0; i < s.size(); i++) {
-		s[i] = toupper(s[i]);
-	}
-}

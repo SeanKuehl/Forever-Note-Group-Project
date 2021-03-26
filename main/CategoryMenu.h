@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <Windows.h>
+
 using namespace std;
 
 class CategoryMenu : public Menu {
@@ -25,5 +27,4 @@ protected:
 	void selectACategory(string);
 	void mergeACategory(string);
 	bool searchACategory(string);
-	void convToUpper(string&);
 };
