@@ -130,25 +130,33 @@ bool NoteMenu::yesNoPassword() {
 }
 
 string NoteMenu::enterContents() {
-	return "";
+
+	string tempContents = "";
+	string currLine;
+
+	cout << "Please enter the contents of your note:" << endl;
+
+	do {
+		cin >> currLine;
+		checkValidInput();
+		tempContents += currLine + "\n";
+
+	}while (currLine.compare("DONE"));
+
+	tempContents = tempContents.substr(0, tempContents.find_last_of("\n"));
+	tempContents = tempContents.substr(0, tempContents.find_last_of("\n"));
+
+	return tempContents;
 }
 
-void NoteMenu::displayNoteOptions(vector<string> noteList) {
+void NoteMenu::displayNoteOptions(string path, vector<string> noteList) {
 
 	int counter = 1;
 	for (auto currName = noteList.begin(); currName != noteList.end(); currName++) {
+		//Note currNote = Note.Open( path + *currName + ".note");
+		//cout << counter << ") " << currNote.getTitle() << endl;
 		cout << counter << ") " << *currName << endl;
 		counter++;
-	}
-}
-
-string NoteMenu::selectNoteOption(vector<string> noteList, int userOption) {
-
-	int counter = 1;
-	for (auto currName = noteList.begin(); currName != noteList.end(); currName++, counter++) {
-		if (counter == userOption) {
-			return *currName;
-		}
 	}
 }
 
@@ -167,7 +175,7 @@ void NoteMenu::selectANote(string path) {
 
 			cout << "Please Select A Note:" << endl << endl;
 
-			displayNoteOptions(noteList);
+			displayNoteOptions(path, noteList);
 
 			cout << endl << ": ";
 			int userOption = 0;
@@ -181,7 +189,7 @@ void NoteMenu::selectANote(string path) {
 
 			} else {
 
-				this->noteName = selectNoteOption(noteList, userOption);
+				this->noteName = noteList.at(userOption - 1);
 				break;
 			}
 
@@ -190,7 +198,7 @@ void NoteMenu::selectANote(string path) {
 
 }
 
-bool NoteMenu::searchANote(string username) {
+bool NoteMenu::searchANote(string path) {
 
 	system("cls");
 
@@ -223,7 +231,7 @@ bool NoteMenu::searchANote(string username) {
 
 		} else {
 			cout << endl;
-			displayNoteOptions(searchList);
+			displayNoteOptions(path, searchList);
 
 			cout << endl << ": ";
 			int userOption = 0;
@@ -237,7 +245,7 @@ bool NoteMenu::searchANote(string username) {
 
 			} else {
 
-				this->noteSearch = selectNoteOption(searchList, userOption);
+				this->noteSearch = searchList.at(userOption - 1);
 				return true;
 
 			}

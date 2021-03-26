@@ -78,16 +78,6 @@ void CategoryMenu::displayCatOptions(vector<string> catList) {
 	}
 }
 
-string CategoryMenu::selectCatOption(vector<string> catList, int userOption) {
-
-	int counter = 1;
-	for (auto currName = catList.begin(); currName != catList.end(); currName++, counter++) {
-		if (counter == userOption) {
-			return *currName;
-		}
-	}
-}
-
 void CategoryMenu::createACategory(string username) {
 
 	string categoryName;
@@ -100,6 +90,8 @@ void CategoryMenu::createACategory(string username) {
 		checkValidInput();
 		valid = checkCharacters(categoryName);
 		
+		//if(!valid)
+
 	} while (!valid);
 
 	this->catName = categoryName;
@@ -121,6 +113,7 @@ void CategoryMenu::selectACategory(string username) {
 
 		if (catList.empty()) {
 			cout << "No Categories Exist!" << endl;
+			Sleep(1000);
 			catExists = false;
 		} else {
 
@@ -140,7 +133,7 @@ void CategoryMenu::selectACategory(string username) {
 
 			} else {
 
-				this->catName = selectCatOption(catList, userOption);
+				this->catName = catList.at(userOption - 1);
 				break;
 			}
 
@@ -166,28 +159,28 @@ void CategoryMenu::mergeACategory(string username) {
 
 			displayCatOptions(catList);
 
-			cout << endl << "1: ";
-			int userOption1 = 0;
-			cin >> userOption1;
+			cout << endl << "Source: ";
+			int source = 0;
+			cin >> source;
 			checkValidInput();
 
-			cout << endl << "2: ";
-			int userOption2 = 0;
-			cin >> userOption2;
+			cout << endl << "Destination: ";
+			int destination = 0;
+			cin >> destination;
 			checkValidInput();
 
-			if (userOption1 == 0 || userOption1 > catList.size() &&
-			    userOption2 == 0 || userOption2 > catList.size()) {
+			if (source == 0 || source > catList.size() &&
+				destination == 0 || destination > catList.size()) {
 
 				system("cls");
 				cout << "Please enter valid options: " << endl << endl;
 
 			} else {
 
-				this->catMerge1 = selectCatOption(catList, userOption1);
-				this->catMerge2 = selectCatOption(catList, userOption2);
+				this->source = username + catList.at(source - 1);
+				this->destination = username + catList.at(destination - 1);
 
-				/*if (mergeCategories(username, this->catMerge1, this->catMerge2)) {
+				/*if (mergeCategories(this->source, this->destination)) {
 					cout << "Merging Successful!" << endl;
 				} else {
 					cout << "Merging Was NOT Successful!" << endl;
@@ -248,7 +241,7 @@ bool CategoryMenu::searchACategory(string username) {
 
 			} else {
 
-				this->catSearch = selectCatOption(searchList, userOption);
+				this->catSearch = searchList.at(userOption - 1);
 				return true;
 
 			}

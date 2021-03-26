@@ -71,8 +71,6 @@ void CreateAnAccount::displayMenu() {
 
 }
 
-
-
 bool CreateAnAccount::checkMenuOption(string& path, menuType& mType) {
 	path = this->username + "/";
 	mType = menuType::CategoryMenu;

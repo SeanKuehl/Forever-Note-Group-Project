@@ -26,6 +26,8 @@ void Login::displayMenu() {
 	} else {
 		system("cls");
 		cout << "This Account Does Not Exist!" << endl << endl;
+		Sleep(1000);
+		displayMessage();
 		displayMenu();
 	}*/
 

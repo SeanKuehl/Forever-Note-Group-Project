@@ -10,8 +10,8 @@ using namespace std;
 
 class CategoryMenu : public Menu {
 	string catName;
-	string catMerge1;
-	string catMerge2;
+	string source;
+	string destination;
 	string catSearch;
 	vector<string> catList;
 	
@@ -22,7 +22,6 @@ public:
 	bool checkMenuOption(string&, menuType&) override;
 protected:
 	void displayCatOptions(vector<string>);
-	string selectCatOption(vector<string>, int);
 	void createACategory(string);
 	void selectACategory(string);
 	void mergeACategory(string);

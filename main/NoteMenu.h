@@ -24,7 +24,6 @@ private:
 	bool yesNoPassword();
 	string enterContents();
 	void selectANote(string);
-	void displayNoteOptions(vector<string>);
-	string selectNoteOption(vector<string>, int);
+	void displayNoteOptions(string path, vector<string> noteList);
 	bool searchANote(string);
 };

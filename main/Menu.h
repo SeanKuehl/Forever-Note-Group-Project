@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include "menuType.h"
+//#define YES 'YES'
+//#define NO 'NO'
 using namespace std;
 
 class Menu {

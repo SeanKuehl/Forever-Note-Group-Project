@@ -75,6 +75,7 @@ void Menu::convToUpper(string& s) {
 	}
 }
 
+//fix this
 bool Menu::checkYesNo() {
 
 	bool yesNo = false;
