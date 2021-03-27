@@ -6,8 +6,7 @@ int main() {
 	Note note = Note("New title", "contents", true, "pa$$");
 	string someString;
 
-	note.GetTitle(someString);
-	std::cout << someString << std::endl;
+	std::cout << note.GetTitle() << std::endl;
 	note.GetContents(someString);
 	std::cout << someString << std::endl;
 
@@ -21,8 +20,7 @@ int main() {
 
 	vector<string> strings;
 
-	note.GetTitle(someString);
-	std::cout << someString << std::endl;
+	std::cout << note.GetTitle() << std::endl;
 	strings.push_back(someString);
 	note.GetContents(someString);
 	std::cout << someString << std::endl;

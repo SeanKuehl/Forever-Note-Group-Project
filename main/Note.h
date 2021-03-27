@@ -12,7 +12,6 @@ private:
 	string contents;
 	string password;
 	string path;
-	bool isEncrypted;
 	bool isPasswordProtected;
 	PasswordState passwordState;
 
@@ -50,12 +49,10 @@ public:
 	~Note();
 
 	/// <summary>
-	/// Get the Note's title, returns the PasswordState.
-	/// Given string is not altered if PasswordState is Locked
+	/// Get the Note's title
 	/// </summary>
-	/// <param name="">becomes title of Note if unlocked</param>
-	/// <returns>State of the Password</returns>
-	PasswordState GetTitle(string&);
+	/// <returns>Title of Note</returns>
+	string GetTitle();
 	/// <summary>
 	/// Get the Note's contents, returns the PasswordState.
 	/// Given string is not altered if PasswordState is Locked
@@ -63,12 +60,12 @@ public:
 	/// <param name="">becomes contents of Note if unlocked</param>
 	/// <returns>State of the Password</returns>
 	PasswordState GetContents(string&);
-
 	/// <summary>
-	/// Set isEnctypted flag
+	/// Get the Note's password state, if locked contents are not accessible
 	/// </summary>
-	/// <param name="isEncrypted"></param>
-	void SetIsEncrypted(bool);
+	/// <returns>PasswordState of Note</returns>
+	PasswordState GetPasswordState();
+
 	/// <summary>
 	/// Set the password
 	/// </summary>

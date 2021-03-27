@@ -22,7 +22,6 @@ Note::Note(string title, string contents, bool isEncrypted, string password)
 {
 	this->title = title;
 	this->contents = contents;
-	this->isEncrypted = isEncrypted;
 
 	this->SetPassword(password);
 }
@@ -39,35 +38,23 @@ void Note::WritetoFile()
 	fileStream.open(this->path, ios::out);
 	if (fileStream.is_open())
 	{
-		if (this->isEncrypted)
+		//call encryption
+		vector<string> noteStrings;
+		noteStrings.push_back(this->title);
+		noteStrings.push_back(this->contents);
+		if (this->isPasswordProtected)
 		{
-			//call encryption
-			vector<string> noteStrings;
-			noteStrings.push_back(this->title);
-			noteStrings.push_back(this->contents);
-			if (this->isPasswordProtected)
-			{
-				noteStrings.push_back(this->password);
-			}
-
-			vector<string> encryptedStrings = noteStrings;
-			encryptedStrings.push_back("!@#"); //remove this
-			//vector<string> encryptedStrings = Encrypt(noteStrings);
-			string encrytionKey = encryptedStrings.back();
-			fileStream << "#" << encrytionKey << endl;
-			for (vector<string>::iterator i = encryptedStrings.begin(); i != encryptedStrings.end() - 1; i++)
-			{
-				fileStream << openingBrackets << *i << closingBrackets << endl;
-			}
+			noteStrings.push_back(this->password);
 		}
-		else
+
+		vector<string> encryptedStrings = noteStrings;
+		encryptedStrings.push_back("!@#"); //remove this
+		//vector<string> encryptedStrings = Encrypt(noteStrings);
+		string encrytionKey = encryptedStrings.back();
+		fileStream << "#" << encrytionKey << endl;
+		for (vector<string>::iterator i = encryptedStrings.begin(); i != encryptedStrings.end() - 1; i++)
 		{
-			fileStream << openingBrackets << this->title << closingBrackets << endl;
-			fileStream << openingBrackets << this->contents << closingBrackets << endl;
-			if (this->isPasswordProtected)
-			{
-				fileStream << openingBrackets << this->password << closingBrackets << endl;
-			}
+			fileStream << openingBrackets << *i << closingBrackets << endl;
 		}
 
 		fileStream.close();
@@ -99,14 +86,9 @@ void Note::ReadNoteField(string temp, string& field, fstream& fileStream)
 }
 
 //public functions
-PasswordState Note::GetTitle(string& title)
+string Note::GetTitle()
 {
-	if (passwordState == PasswordState::Locked)
-	{
-		return passwordState;
-	}
-	title = this->title;
-	return passwordState;
+	return this->title;;
 }
 
 PasswordState Note::GetContents(string& contents)
@@ -119,9 +101,9 @@ PasswordState Note::GetContents(string& contents)
 	return passwordState;
 }
 
-void Note::SetIsEncrypted(bool isEncrypted)
+PasswordState Note::GetPasswordState()
 {
-	this->isEncrypted = isEncrypted;
+	return this->passwordState;
 }
 
 void Note::SetPassword(string password)
@@ -129,7 +111,6 @@ void Note::SetPassword(string password)
 	this->password = password;
 	if (password != "")
 	{
-		this->SetIsEncrypted(true);
 		this->isPasswordProtected = true;
 		this->passwordState = PasswordState::Unlocked;
 	}
