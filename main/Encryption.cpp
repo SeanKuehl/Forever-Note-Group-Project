@@ -1,8 +1,16 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+
+#include <iostream>
 #include <cctype>
 #include <string>
 #include <vector>
 #include <time.h>
+
+#define PRINTABLES_LIST_SIZE 96 //was 95 but now + \n
 
 using namespace std;
 //https://stackoverflow.com/questions/27054414/printing-all-the-ascii-values-in-c-c/27054451
@@ -73,11 +81,11 @@ string EncryptLine(string fun, vector<char> printablesList, int shift) {
 				charIndex = i;
 				charIndex += shift;
 
-				if (charIndex >= 95) {
+				if (charIndex >= PRINTABLES_LIST_SIZE) {
 					//if the list index + shift is outside of list range, 
 					//put it in range 
-					charIndex -= 95;
-					//could something become more than 95 over? I don't think so but I'm not sure
+					charIndex -= PRINTABLES_LIST_SIZE;
+					//could something become more than 96 over? I don't think so but I'm not sure
 				}
 				toReturn += printablesList.at(charIndex);
 				break;
@@ -107,6 +115,10 @@ vector<char> MakePrintableCharactersList() {
 			toReturn.push_back(char(a));
 		}
 	}
+	toReturn.push_back('\n');	//since user will be inputting from console, we decided we needed this character
+
+
+
 	return toReturn;
 }
 
@@ -123,8 +135,8 @@ string DecryptLine(string fun, vector<char> printablesList, int shift) {
 				if (charIndex < 0) {
 					//if the list index + shift is outside of list range, 
 					//put it in range 
-					charIndex += 95; //if it's a wrap around case, -= shift will make it negative
-					//could something become more than 95 over? I don't think so but I'm not sure
+					charIndex += PRINTABLES_LIST_SIZE; //if it's a wrap around case, -= shift will make it negative
+					//could something become more than 96 over? I don't think so but I'm not sure
 				}
 
 				//cout << charIndex << endl;
