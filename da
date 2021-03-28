@@ -1,0 +1,47 @@
+[33mcommit 740b8c17da664bf5c452db3a3a96444ee29b525a[m[33m ([m[1;36mHEAD -> [m[1;32mUI-Module[m[33m, [m[1;31morigin/UI-Module[m[33m)[m
+Author: Issi <Islamdoesart@gmail.com>
+Date:   Fri Mar 26 16:53:43 2021 -0400
+
+    Small changes made after code peer review seesion
+
+[33mcommit d19c587bfbc5b0f80d1a89aa37976944ec798486[m
+Author: Issi <Islamdoesart@gmail.com>
+Date:   Fri Mar 26 14:39:03 2021 -0400
+
+    Category and Note menu updated but not quite complete
+
+[33mcommit 5431343f5fd9dee20cc51c88668bf747a9094544[m
+Author: Issi <Islamdoesart@gmail.com>
+Date:   Wed Mar 24 19:14:11 2021 -0400
+
+    Category Menu Functions finished, other files updated a little
+
+[33mcommit 4fcba2532521c6b6ebbae7d3c5af6c3404d5fb5b[m
+Author: Issi <Islamdoesart@gmail.com>
+Date:   Tue Mar 23 16:45:43 2021 -0400
+
+    Base wireframe complete, UI menus for createACategory and selectACategory finished
+
+[33mcommit f554236dd931f759d042cc76fb49461078e0fd15[m
+Author: Issi <Islamdoesart@gmail.com>
+Date:   Sat Mar 20 14:55:28 2021 -0400
+
+    WelcomeMenu/Login/CreateAccount with error checking complete
+
+[33mcommit 9250d88fba5745410bf017238db416f961277732[m
+Author: Issi <Islamdoesart@gmail.com>
+Date:   Thu Mar 4 16:02:57 2021 -0500
+
+    Added Namespace std
+
+[33mcommit 92415890312dbfbc580bc0d806f3d5aa30df1af6[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/Sean-Kuehl/Users-module[m[33m, [m[1;31morigin/Notes-Module[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Sean Kuehl <teddscottfelt@gmail.com>
+Date:   Thu Mar 4 15:23:05 2021 -0500
+
+    Add project files.
+
+[33mcommit bcf9a49ba1dec56669464cae7436af612505c431[m
+Author: Sean Kuehl <teddscottfelt@gmail.com>
+Date:   Thu Mar 4 15:23:03 2021 -0500
+
+    Add .gitignore and .gitattributes.

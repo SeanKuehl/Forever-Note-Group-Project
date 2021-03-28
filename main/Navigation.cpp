@@ -5,6 +5,9 @@ void selectMenu(menuType type, Menu** m) {
 	Menu* tempMenu = *m;
 
 	switch (type) {
+	case menuType::mMenu:
+		*m = *m = new Menu;
+		break;
 	case menuType::Login:
 		*m = new Login;
 		break;
@@ -16,8 +19,11 @@ void selectMenu(menuType type, Menu** m) {
 		break;
 	case menuType::NoteMenu:
 		*m = new NoteMenu;
+		break;
+	case menuType::NoteModificationMenu:
+		*m = new NoteModificationMenu;
+		break;
 	default:
-		*m = new Menu;
 		break;
 	}
 

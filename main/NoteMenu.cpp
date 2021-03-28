@@ -35,10 +35,12 @@ bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
 		case 2:
 			//Select A Note
 			selectANote(path);
+			mType = menuType::NoteModificationMenu;
 			return true;
 		case 3:
 			//Search Existing Notes
 			searchANote(path);
+			mType = menuType::NoteModificationMenu;
 			return true;
 		case 4:
 			//Go Back

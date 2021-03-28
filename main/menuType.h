@@ -1,2 +1,2 @@
 #pragma once
-enum class menuType { Login, CreateAnAccount, CategoryMenu, NoteMenu };
+enum class menuType { mMenu, Login, CreateAnAccount, CategoryMenu, NoteMenu, NoteModificationMenu };

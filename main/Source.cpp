@@ -8,23 +8,21 @@ using namespace std;
 int main() {
 
 	Menu* m = new Menu;
-	menuType mType;
+	menuType mType = menuType::mMenu;
 	string path = "";
 
-	/*m->displayMessage();
+	m->displayMessage();
 	m->displayMenu();
-	m->checkMenuOption(path, mType);*/
+	m->checkMenuOption(path, mType);
 
 	do {
-		
+		selectMenu(mType, &m);
 		m->displayMessage();
 		m->displayMenu();
 
 		if (!(m->checkMenuOption(path, mType))) {
 			exitApplication(m);
 		}
-
-		selectMenu(mType, &m);
 
 	} while (true);
 

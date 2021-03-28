@@ -5,6 +5,7 @@
 #include "CreateAnAccount.h"
 #include "CategoryMenu.h"
 #include "NoteMenu.h"
+#include "NoteModificationMenu.h"
 
 void selectMenu(menuType, Menu**);
 void exitApplication(Menu*);
