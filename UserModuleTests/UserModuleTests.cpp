@@ -207,7 +207,7 @@ namespace UserModuleTests
 		{
 			//arrange, act, assert
 			string inputPassword = "secret";
-			string expected = "(yw'y)";
+			string expected = "'yw&y(";
 			vector<string> actual;
 			vector<string> inputMessage = { "hello", "there" };
 			//password shift is automatically 20
@@ -226,7 +226,7 @@ namespace UserModuleTests
 																		
 			//arrange, act, assert
 			string inputPassword = "password1234!?*&";
-			string expected = "%u((,$'xEFGH5S>:";
+			string expected = "$u''+#&xEFGH5S>:";
 			vector<string> actual;
 			vector<string> inputMessage = { "hello", "there" };
 			//password shift is automatically 20
@@ -245,7 +245,7 @@ namespace UserModuleTests
 		{
 			//example passwordLocked message:
 			//##########
-			//%u((,$'xEFGH5S>:
+			//$u''+#&xEFGH5S>:
 			//gdkkn~sgdqd~rhqd
 			//axd~l`&`l
 				//`kk~`qntmc~sgd~vnqkc
@@ -255,7 +255,7 @@ namespace UserModuleTests
 			
 			string expected = "password1234!?*&";
 			vector<string> actual;
-			vector<string> inputMessage = { "##########", "%u((,$'xEFGH5S>:", "gdkkn~sgdqd~rhqd", "axd~l`&`l", "`kk~`qntmc~sgd~vnqkc", "161" };
+			vector<string> inputMessage = { "##########", "$u''+#&xEFGH5S>:", "gdkkn~sgdqd~rhqd", "axd~l`&`l", "`kk~`qntmc~sgd~vnqkc", "161" };
 			//password shift is automatically 20
 
 			actual = PasswordUnlock(inputMessage);
@@ -282,7 +282,7 @@ namespace UserModuleTests
 
 			string expected = "secret";
 			vector<string> actual;
-			vector<string> inputMessage = { "##########", "(yw'y)", "gdkkn~sgdqd~rhqd", "axd~l`&`l", "`kk~`qntmc~sgd~vnqkc", "161" };
+			vector<string> inputMessage = { "##########", "'yw&y(", "gdkkn~sgdqd~rhqd", "axd~l`&`l", "`kk~`qntmc~sgd~vnqkc", "161" };
 			//password shift is automatically 20
 
 			actual = PasswordUnlock(inputMessage);
