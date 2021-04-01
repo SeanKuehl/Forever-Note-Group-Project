@@ -42,7 +42,7 @@ public:
 	/// <param name="contents"></param>
 	/// <param name="isEncrypted"></param>
 	/// <param name="password"></param>
-	Note(string, string, bool, string);
+	Note(string, string, string);
 	/// <summary>
 	/// Destructor
 	/// </summary>

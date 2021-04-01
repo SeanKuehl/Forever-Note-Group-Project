@@ -3,7 +3,7 @@
 #include "Note.h"
 
 int main() {
-	Note note = Note("New title", "contents", true, "pa$$");
+	Note note = Note("New title", "contents", "pa$$");
 	string someString;
 
 	std::cout << note.GetTitle() << std::endl;

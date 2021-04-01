@@ -14,11 +14,11 @@ const string Note::closingBrackets = "}}";
 const char Note::encryptionChar = '#';
 
 //Constructors
-Note::Note() : Note("", "", false, "") { }
+Note::Note() : Note("", "", "") { }
 
-Note::Note(string title, string contents) : Note(title, contents, false, "") { }
+Note::Note(string title, string contents) : Note(title, contents, "") { }
 
-Note::Note(string title, string contents, bool isEncrypted, string password)
+Note::Note(string title, string contents, string password)
 {
 	this->title = title;
 	this->contents = contents;
@@ -181,11 +181,11 @@ Note Note::Open(string filePath)
 		//vector<string> decryptedStrings = Decrypt(readStrings);
 		if (decryptedStrings.size() > 2)
 		{
-			newNote = Note(decryptedStrings[0], decryptedStrings[1], true, decryptedStrings[2]);
+			newNote = Note(decryptedStrings[0], decryptedStrings[1], decryptedStrings[2]);
 		}
 		else
 		{
-			newNote = Note(decryptedStrings[0], decryptedStrings[1], true, "");
+			newNote = Note(decryptedStrings[0], decryptedStrings[1], "");
 		}
 	}
 	else
