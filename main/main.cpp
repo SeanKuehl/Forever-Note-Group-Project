@@ -8,6 +8,7 @@
 #include <vector>
 #include<stdlib.h>
 
+
 using namespace std;
 
 int Check_Category(const char* Path)
@@ -27,7 +28,7 @@ void Create_Category(string Path, string Name)           // Create Cat
     /*cout << "Enter New Folder's Name : ";
     string INPUT;
     cin >> INPUT;*/
-    string Npath = Path + Name;
+    string Npath = Path + Name + +"//";
 
 
     cout << Npath; //888888888888888888888888888888888
@@ -37,7 +38,8 @@ void Create_Category(string Path, string Name)           // Create Cat
 
     if (Check_Category(Opath) == 1)
     {
-        cout << "\nCreated new Directory " << Path << endl;
+        cout << "\nCreated new Directory \n" << Path << endl;
+        
     }
     else if (Check_Category(Opath) == 0)
     {
@@ -46,6 +48,21 @@ void Create_Category(string Path, string Name)           // Create Cat
     }
 
 
+}
+int confirm(char Input)
+{
+    if (&Input == "Y")
+    {
+        return 1;
+    }
+    else if (&Input == "N")
+    {
+        return 2;
+    }
+    else
+    {
+        return 3;
+    }
 }
 
 void Delete_Category(string Path, string Name)
@@ -57,20 +74,38 @@ void Delete_Category(string Path, string Name)
         cout << "Folder " << Name << " Deleted Succesfully" << endl;
     }
     else {
-        cout << "Folder " << Name << " Can't be Deleted" << endl;
+        cout << "Folder " << Name << " Can't be Deleted because it has files in it.\nDo you want to delete folder with files?(Y/N)" << endl;
+        char Inp;
+        cin >> Inp;
+        if (confirm(Inp) == 1)
+        {
+            string DelPath = "RMDIR /Q/S " + NPath;
+            const char* Del_Path = DelPath.c_str();
+            system(Del_Path);
+            if (Check_Category(Del_Path) == 0)
+            {
+                cout << "Folder " << Name << " Deleted Successfully.";
+            }
+        }
+
     }
 }
 
 void merge_Category(string Source, string Destination)
 {
+
     string Com2 = "move " + Source + " " + Destination;
     string COM = Com2;
-
     const char* COMMAND = COM.c_str();
 
     system(COMMAND);
 
+    string COMMAND2 = "for %F in (" + Source + "\*.*) do move /Y %F " + Destination;
+    const char* COM_2 = COMMAND2.c_str();
+    system(COM_2);
+
 }
+
 
 void ListContents(string Path)
 {
@@ -106,7 +141,7 @@ void Merge_Category(string F1, string F2)
 int main()
 {
     string Mpath = "C:/Users/arunp/Desktop/Winter_Sem/TB/Hello/";
-    string MINPUT = "cavemen";
+    string MINPUT = "OOOlala";
 
     Create_Category(Mpath, MINPUT);
 
@@ -127,8 +162,8 @@ int main()
      NPATH1.c_str
      */
 
-    string File = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\Nomen";
-    string File2 = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\meh";
+    string File = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\File2";
+    string File2 = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\Sugun";
 
 
     merge_Category(File, File2);
