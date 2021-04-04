@@ -13,6 +13,7 @@ class CategoryMenu : public Menu {
 	string source;
 	string destination;
 	string catSearch;
+	string catDelete;
 	vector<string> catList;
 	
 public:
@@ -20,10 +21,11 @@ public:
 	void displayMessage() override;
 	void displayMenu() override;
 	bool checkMenuOption(string&, menuType&) override;
-protected:
+private:
 	void displayCatOptions(vector<string>);
 	void createACategory(string);
 	void selectACategory(string);
 	void mergeACategory(string);
 	bool searchACategory(string);
+	void deleteACategory(string);
 };

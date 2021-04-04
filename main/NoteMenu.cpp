@@ -133,10 +133,12 @@ bool NoteMenu::yesNoPassword() {
 
 string NoteMenu::enterContents() {
 
+	system("cls");
 	string tempContents = "";
 	string currLine;
 
-	cout << "Please enter the contents of your note:" << endl;
+	cout << "Please enter the contents of your note:" << endl
+		 << "Type 'DONE' (all caps) on a new line";
 
 	do {
 		cin >> currLine;
@@ -215,7 +217,8 @@ bool NoteMenu::searchANote(string path) {
 		vector<string> searchList;
 
 		for (auto currName = noteList.begin(); currName != noteList.end(); currName++) {
-
+			//Note currNote = Note.Open( path + *currName + ".note");
+			//string tempCurrName = currNote.getTitle();
 			string tempCurrName = *currName;
 			convToUpper(tempCurrName);
 			string tempUserSearch = userSearch;

@@ -13,8 +13,9 @@ void NoteModificationMenu::displayMenu() {
 		 << "2) Protect Note" << endl
 		 << "3) Unlock Note" << endl
 		 << "4) Edit Note" << endl
-		 << "5) Go Back" << endl
-		 << "6) Exit" << endl;
+		 << "5) Delete Note" << endl
+		 << "6) Go Back" << endl
+		 << "7) Exit" << endl;
 }
 
 bool NoteModificationMenu::checkMenuOption(string& path, menuType& mType) {
@@ -51,13 +52,17 @@ bool NoteModificationMenu::checkMenuOption(string& path, menuType& mType) {
 			//editNote(path);
 			
 			//path = path + this->catSearch + "/";
-			mType = menuType::NoteMenu;
+			mType = menuType::NoteModificationMenu;
 			return true;
 		case 5:
-			//Go Back
+			//Delete Note
 			mType = menuType::NoteMenu;
 			return true;
 		case 6:
+			//Go Back
+			mType = menuType::NoteMenu;
+			return true;
+		case 7:
 			//Exit
 			return false;
 		default:
