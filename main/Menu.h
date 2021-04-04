@@ -21,5 +21,3 @@ public:
 	virtual bool checkMenuOption(string&, menuType&);
 	
 };
-
-//void checkValidInput();

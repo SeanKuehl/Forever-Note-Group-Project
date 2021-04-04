@@ -49,14 +49,14 @@ bool NoteModificationMenu::checkMenuOption(string& path, menuType& mType) {
 			return true;
 		case 4:
 			//Edit Note
-			//editNote(path);
+			editNote();
 			
-			//path = path + this->catSearch + "/";
 			mType = menuType::NoteModificationMenu;
 			return true;
 		case 5:
 			//Delete Note
-			mType = menuType::NoteModificationMenu;
+			deleteNote();
+			mType = menuType::NoteMenu;
 			return true;
 		case 6:
 			//Go Back
@@ -186,8 +186,17 @@ void NoteModificationMenu::deleteNote() {
 		return;
 	} else {
 		//delete Note Here
-		//currNote.Delete();
-		cout << "Note was deleted" << endl;
+		cout << "Are you sure you want to delete this note? (Y/N)" << endl << endl
+			 << ": ";
+		if (checkYesNo()) {
+			//currNote.Delete();
+			cout << "Note was deleted" << endl;
+			Sleep(1000);
+		} else {
+			cout << "Note deletion canceled" << endl;
+			Sleep(1000);
+		}
+		
 	}
 
 }
