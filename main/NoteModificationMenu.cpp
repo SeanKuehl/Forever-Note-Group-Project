@@ -190,10 +190,10 @@ void NoteModificationMenu::deleteNote() {
 			 << ": ";
 		if (checkYesNo()) {
 			//currNote.Delete();
-			cout << "Note was deleted" << endl;
+			cout << endl << "Note was deleted" << endl;
 			Sleep(1000);
 		} else {
-			cout << "Note deletion canceled" << endl;
+			cout << endl << "Note deletion canceled" << endl;
 			Sleep(1000);
 		}
 		
