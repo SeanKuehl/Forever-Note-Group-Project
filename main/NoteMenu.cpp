@@ -44,7 +44,7 @@ bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
 			return true;
 		case 4:
 			//Go Back
-			removeCategoryFromPath(path);
+			removeLastPathEntry(path);
 			mType = menuType::CategoryMenu;
 			return true;
 		case 5:
@@ -61,15 +61,11 @@ bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
 	} while (true);
 }
 
-void NoteMenu::removeCategoryFromPath(string& path) {
-	int firstindexOfSlash = path.find_first_of("/");
-	path = path.substr(0, firstindexOfSlash + 1);
-}
+
 
 void NoteMenu::createANote(string path) {
 
 	string noteName;
-	
 		
 	cout << "What would you like to name your note?" << endl << endl
 		<< ": ";
@@ -100,12 +96,14 @@ void NoteMenu::createANote(string path) {
 			checkValidInput();
 			if (password.size() > 0) {
 				//Note(noteName, contents, password);
+				//writeToFile();
 				break;
 			} else {
 				cout << "Invalid Password" << endl << endl;
 			}
 		} else {
 			//Note(noteName, contents);
+			//writeToFile();
 			break;
 		}
 	} while (true);
@@ -138,7 +136,7 @@ string NoteMenu::enterContents() {
 	string currLine;
 
 	cout << "Please enter the contents of your note:" << endl
-		 << "Type 'DONE' (all caps) on a new line";
+		 << "Type 'DONE' (all caps) on a new line" << endl << endl;
 
 	do {
 		cin >> currLine;

@@ -9,7 +9,7 @@ using namespace std;
 class Menu {
 protected:
 	int menuOption;
-
+	void removeLastPathEntry(string&);
 	void checkValidInput();
 	bool checkCharacters(string);
 	bool checkYesNo();
@@ -19,5 +19,4 @@ public:
 	virtual void displayMessage();
 	virtual void displayMenu();
 	virtual bool checkMenuOption(string&, menuType&);
-	
 };

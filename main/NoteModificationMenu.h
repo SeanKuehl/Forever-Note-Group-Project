@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
+#include <stdio.h>
+#include <conio.h>
 
 using namespace std;
 
@@ -14,10 +16,10 @@ public:
 	void displayMenu() override;
 	bool checkMenuOption(string&, menuType&) override;
 private:
-	bool checkNoteState();
 	void displayNote();
 	void lockNote();
 	void unlockNote();
+	void removeNotePassword();
 	void editNote();
 	void deleteNote();
 };

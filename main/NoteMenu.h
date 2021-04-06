@@ -19,7 +19,6 @@ public:
 	void displayMenu() override;
 	bool checkMenuOption(string&, menuType&) override;
 private:
-	void removeCategoryFromPath(string&);
 	void createANote(string);
 	bool yesNoPassword();
 	string enterContents();
