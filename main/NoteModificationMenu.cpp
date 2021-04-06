@@ -12,7 +12,7 @@ void NoteModificationMenu::displayMenu() {
 	cout << "1) View Note" << endl
 		 << "2) Lock Note" << endl
 		 << "3) Unlock Note" << endl
-		 << "4) Remove Note Password" << endl /*if (currNote.setPassword("")) {*/
+		 << "4) Remove Note Password" << endl
 		 << "5) Edit Note" << endl
 		 << "6) Delete Note" << endl
 		 << "7) Go Back" << endl
@@ -92,7 +92,7 @@ void NoteModificationMenu::displayNote() {
 	cout << "---View Note---" << endl << endl;
 
 	//print Note Here
-	string noteString = "hello\nhi\ntestme\nbye";
+	string noteString = "hello my name is\nhi\ntestme\nbye";
 
 	//if(currNote.getContents(noteString) == passwordState::Locked){
 	if (!true) {
@@ -103,8 +103,8 @@ void NoteModificationMenu::displayNote() {
 		cout << noteString << endl << endl;
 	}
 
-	cout << "Enter any key to return to the Modification Menu..." << endl << endl;
-	cout << ": ";
+	cout << "Enter any key to return to the Modification Menu...";// << endl << endl;
+	//cout << ": ";
 	system("pause >nul");
 
 }

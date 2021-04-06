@@ -139,10 +139,11 @@ string NoteMenu::enterContents() {
 		 << "Type 'DONE' (all caps) on a new line" << endl << endl;
 
 	do {
-		cin >> currLine;
-		checkValidInput();
-		tempContents += currLine + "\n";
-
+		getline(cin, currLine);
+		if (currLine.length() > 0) {
+			tempContents += currLine + "\n";
+		}
+		
 	}while (currLine.compare("DONE"));
 
 	tempContents = tempContents.substr(0, tempContents.find_last_of("\n"));
