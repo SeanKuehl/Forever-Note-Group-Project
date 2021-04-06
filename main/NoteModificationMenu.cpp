@@ -166,9 +166,16 @@ void NoteModificationMenu::removeNotePassword() {
 	cout << "---Remove Note Password---" << endl << endl;
 
 	if (checkYesNo()) {
-		//currNote.setPassword("");
-		cout << "Password was removed successfully" << endl;
-		Sleep(1000);
+		//if (currNote.passwordState() == passwordState::Locked) {
+		if (!true) {
+			cout << "Note must be unlocked before it can be edited!" << endl;
+			Sleep(1000);
+			return;
+		} else {
+			//currNote.setPassword("");
+			cout << "Password was removed successfully" << endl;
+			Sleep(1000);
+		}
 	} else {
 		cout << "Password removal aborted" << endl
 			 << "Returning to the menu" << endl;
