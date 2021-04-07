@@ -139,7 +139,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Category.cpp" />
+    <ClCompile Include="Create_Category.cpp" />
+    <ClCompile Include="Delete_Category.cpp" />
+    <ClCompile Include="List_Category.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Merge_Category.cpp" />
+    <ClCompile Include="Support_Functions.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Category.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
