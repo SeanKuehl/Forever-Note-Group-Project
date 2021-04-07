@@ -11,48 +11,48 @@
 #include <experimental/filesystem>
 #include <vector>
 
-
 namespace fs = std::experimental::filesystem;
 using namespace std;
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-int Check_Category(const char* Path)
+bool Check_Category(const char* Path)
 {
     struct stat info;
 
     if (stat(Path, &info) != 0)
-        return 0;
+        return false;
     else if (info.st_mode & S_IFDIR)
-        return 1;
+        return true;
     else
-        return 0;
+        return false;
 }
 
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-void Create_Category(string Path, string Name)           // CPP FUNCTION TO CREATE A CATEGORY
+bool Create_Category(string Path, string Name)                  // CPP FUNCTION TO CREATE A CATEGORY
 {
     
     string Npath = Path + Name + +"//";
 
 
-    cout << Npath; 
+    //cout << Npath; 
     const char* Opath = Npath.c_str();
 
     _mkdir(Opath);
 
-    if (Check_Category(Opath) == 1)
+    if (Check_Category(Opath))
     {
-        cout << "\nCreated new Directory \n" << Path << endl;
-        
+        //cout << "\nCreated new Directory \n" << Path << endl;
+        return true;
     }
-    else if (Check_Category(Opath) == 0)
+    else 
     {
 
-        cout << "\nCan't create Folder\n";
+        //cout << "\nCan't create Folder\n";
+        return false;
     }
 
 
@@ -61,7 +61,7 @@ void Create_Category(string Path, string Name)           // CPP FUNCTION TO CREA
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-int confirm(char Input) // SUPPORT FUNCTION FOR ACTION CONFIRMATIONS
+int confirm(char Input)                              // SUPPORT FUNCTION FOR ACTION CONFIRMATIONS
 {
     if (&Input == "Y")
     {
@@ -80,122 +80,49 @@ int confirm(char Input) // SUPPORT FUNCTION FOR ACTION CONFIRMATIONS
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-void Delete_Category(string Path, string Name)      // CPP FUNCTION FOR DELETING A CATEGORY
+bool Delete_Category(string Path)                // CPP FUNCTION FOR DELETING A CATEGORY
 {
-    string NPath = Path + Name;
+    string NPath = Path;
     const char* Opath = NPath.c_str();
     if (_rmdir(Opath) != -1)
     {
-        cout << "Folder " << Name << " Deleted Succesfully" << endl;
+        //cout << "Folder " << Name << " Deleted Succesfully" << endl;
+        return true;
+
     }
     else {
-        cout << "Folder " << Name << " Can't be Deleted because it has files in it.\nDo you want to delete folder with files?(Y/N)" << endl;
-        char Inp;
-        cin >> Inp;
-        if (confirm(Inp) == 1)
-        {
-            string DelPath = "RMDIR /Q/S " + NPath;
-            const char* Del_Path = DelPath.c_str();
-            system(Del_Path);
-            if (Check_Category(Del_Path) == 0)
-            {
-                cout << "Folder " << Name << " Deleted Successfully.";
-            }
-        }
+       // cout << "Folder Can't be Deleted because it has files in it.\nDo you want to delete folder with files?(Y/N)" << endl;
+        return false;
 
+    }// Must Add one more case for Can't be deleted
+}
+
+bool Delete_Content_Category(string Path)
+{
+    char Inp;   // Doubt PART
+    cin >> Inp;
+    if (confirm(Inp) == 1)
+    {
+        string DelPath = "RMDIR /Q/S " + Path;
+        const char* Del_Path = DelPath.c_str();
+        system(Del_Path);
+        if (!Check_Category(Del_Path))
+        {
+            //cout << "Folder " << Name << " Deleted Successfully.";
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
-
-
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-std::string Get_Parent(const std::string& fname)    
-{
-    size_t pos = fname.find_last_of("\\/");
-    return (std::string::npos == pos)
-        ? ""
-        : fname.substr(0, pos);
-}
-
-//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-void merge_Category(string Source, string Destination)
-{
-
-    
-    
-        string Com2 = "move " + Source + "\*  " + Destination;
-    string COM = Com2;
-    const char* COMMAND = COM.c_str();
-    string COM_New = " for /f %a IN ('dir %" + Source + "% /b') do move %" + Source + "%\%a " + Destination +"%";
-    const char* COM_New1 = COM_New.c_str();
-    //system(COM_New1);
-    /**/
-    string COMMAND2 = "for %F in (" + Source + "\*.*) do move /Y %F " + Destination;
-    const char* COM_2 = COMMAND2.c_str();
-    //system(COM_2);
-    
-    //string SETCOM = "SET src_folder=" + Source;
-    string TARCOM = Destination + "\\";
-    string MAIN_COM = "for /f %a IN ('dir " + Source + " /b') do move %" + Source + "%\%a %" + TARCOM + "\\";
-        
-        //"for /f %a IN ('dir "+ Source +" /b') do move %"+ Source +"%\%a %"+TARCOM+ "\\";
-        //"FOR / R " + Source + " % i IN(*.png) DO MOVE ""%i"" ""C:\Staging Folder";
-        
-        //const char* SETCOM1 = SETCOM.c_str();
-    //const char* TARCOM1 = TARCOM.c_str();
-    const char* MAIN_COM1 = MAIN_COM.c_str();
-
-    //system(SETCOM1);
-    //system(TARCOM1);
-    system(MAIN_COM1);
-}
-
-void Merge_CAT2(string Source, string Destination)
-{
-    //string COMMAND = "for /f %a IN ('dir %"+Source +"%  /b') do move %"+Source+"%\%a "+Destination+"%\"";
-    //const char* CMD1 = COMMAND.c_str();
-    //system(CMD1);
-
-   /* string COOM2 = "move "+ Source + " "+Destination;
-    const char* COOMA = COOM2.c_str();
-
-    system(COOMA);
-    string PATH = get_current_dir();
-    cout << PATH;
-    */
-
-    string COM1 = "SET src_folder =" + Source;
-    const char* COM11 = COM1.c_str();
-
-    string COM2 = "SET des_folder =" + Destination;
-    const char* COM22 = COM2.c_str();
-
-    string COM3 = "for /f %a IN ('dir ""%src_folder%"" /b') do move ""%src_folder%\%%a"" ""%tar_folder%\"" "";
-    const char* COM33 = COM3.c_str();
-
-    string MAIN_COM = COM1 + ";" + COM2 + ";" + COM3;
-
-    const char* MAINCOM=MAIN_COM.c_str();
-
-    system(COM11);
-    system(COM22);
-    system(COM33);
-
-    system(MAINCOM);
-    //system(MAINCOM);
-    /*
-    system();
-        SET tar_folder = c:\tarfold
-
-        for / f % %a IN('dir "%src_folder%" /b') do move "%src_folder%\%%a" "%tar_folder%\"
-        */
-}
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 
 
 vector<string> List_CAT(string path) {
@@ -216,10 +143,42 @@ vector<string> List_CAT(string path) {
 
 
     }
-
+    
     return Return_Vector;
 }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+bool Merge_Category(string Source, string Destination)
+{
+    vector<string> catList = List_CAT(Source);
+    string Com2;
+
+    for (auto i = catList.begin(); i != catList.end(); i++)
+    {
+        Com2 = "move " + Source + "\\" + *i + " " + Destination + " >nul";
+        const char* COM1 = Com2.c_str();
+
+        system(COM1);
+        //cout <<  *i << endl;
+
+    }
+
+    Delete_Category(Source);
+
+    const char* Source_path = Source.c_str();
+    if (!Check_Category(Source_path))
+    {
+        //cout << "Folder " << Name << " Deleted Successfully.";
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+}
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -232,7 +191,7 @@ int main()
 
     getchar();
 
-    Delete_Category(Mpath, MINPUT);
+    Delete_Category(Mpath);
 
     getchar();
 
@@ -247,14 +206,15 @@ int main()
      NPATH1.c_str
      */
 
-    string File = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\File2";
-    string File2 = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\Sugun";
+    string File = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\test1";
+    //string File = "C:/Users/arunp/Desktop/Winter_Sem/TB/Omg/File2";
+    string File2 = "C:\\Users\\arunp\\Desktop\\Winter_Sem\\TB\\Omg\\test2";
 
 
    // merge_Category(File, File2);
     
     getchar();
-    Merge_CAT2(File, File2);
+    Merge_Category(File, File2);
     getchar();
     string Filee = "C:\\Users\\arunp\\source\\repos\\CategoryPorject\\MoveFolder\\Storage";
     //ListContents(Filee);
