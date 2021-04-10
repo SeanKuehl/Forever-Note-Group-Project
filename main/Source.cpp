@@ -1,27 +1,33 @@
 
-
+#include "Menu.h"
+#include "Login.h"
+#include "Navigation.h"
+#include "menuType.h"
 #include <iostream>
-#include <string>
-#include "CreateAccount.h"
-#include <direct.h>
-
-
 
 using namespace std;
 
 int main() {
 
-	std::cout << "Hello World!" << std::endl;
-	//PutInfoOnTestingFile();
-	
-	//TestCreateAccount("hello", "bye");
-	//TestCreateAccount("hello", "bye");
 
-	/*string userName = "hello";
-	const char* charUserName = userName.c_str();
-	int check = _mkdir(charUserName);
-	cout << check << endl;*/
-	//check is -1 if the diectory already exists!
+	Menu* m = new Menu;
+	menuType mType = menuType::mMenu;
+	string path = "";
+
+	m->displayMessage();
+	m->displayMenu();
+	m->checkMenuOption(path, mType);
+
+	do {
+		selectMenu(mType, &m);
+		m->displayMessage();
+		m->displayMenu();
+
+		if (!(m->checkMenuOption(path, mType))) {
+			exitApplication(m);
+		}
+
+	} while (true);
 
 
 	//#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
@@ -34,4 +40,5 @@ int main() {
 	
 	
 	return 0;
+
 }

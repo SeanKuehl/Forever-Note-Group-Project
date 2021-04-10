@@ -18,6 +18,10 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Encryption.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,8 +37,31 @@
     <ClCompile Include="ListAllInDirectory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateAnAccount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CategoryMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoteMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NoteModificationMenu.cpp">
+
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Encryption.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -50,6 +77,28 @@
     <ClInclude Include="ListAllInDirectory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Login.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateAnAccount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menuType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CategoryMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoteMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NoteModificationMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+
   </ItemGroup>
   <ItemGroup>
     <Text Include="TestDatabase.txt" />

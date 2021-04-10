@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -139,11 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+
     <ClCompile Include="CreateAccount.cpp" />
     <ClCompile Include="Encryption.cpp" />
     <ClCompile Include="ListAllInDirectory.cpp" />
     <ClCompile Include="LogIntoAccount.cpp" />
     <ClCompile Include="Password.cpp" />
+    <ClCompile Include="CategoryMenu.cpp" />
+    <ClCompile Include="CreateAnAccount.cpp" />
+    <ClCompile Include="Login.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Navigation.cpp" />
+    <ClCompile Include="NoteMenu.cpp" />
+    <ClCompile Include="NoteModificationMenu.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +160,15 @@
     <ClInclude Include="ListAllInDirectory.h" />
     <ClInclude Include="LogIntoAccount.h" />
     <ClInclude Include="Password.h" />
+    <ClInclude Include="CategoryMenu.h" />
+    <ClInclude Include="CreateAnAccount.h" />
+    <ClInclude Include="Login.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="menuType.h" />
+    <ClInclude Include="Navigation.h" />
+    <ClInclude Include="NoteMenu.h" />
+    <ClInclude Include="NoteModificationMenu.h" />
+
   </ItemGroup>
   <ItemGroup>
     <Text Include="AccountDatabase.txt" />
