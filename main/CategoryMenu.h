@@ -26,7 +26,7 @@ public:
 private:
 	void displayCatOptions(vector<string>);
 	void createACategory(string);
-	void selectACategory(string);
+	bool selectACategory(string);
 	void mergeACategory(string);
 	bool searchACategory(string);
 	void deleteACategory(string);

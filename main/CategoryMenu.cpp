@@ -22,7 +22,7 @@ bool CategoryMenu::checkMenuOption(string& path, menuType& mType) {
 
 	this->catList = GetCategoriesInDirectory(path);
 
-	cout << endl << ":";
+	cout << endl << ": ";
 	cin >> menuOption;
 	checkValidInput();
 	do {
@@ -35,9 +35,10 @@ bool CategoryMenu::checkMenuOption(string& path, menuType& mType) {
 			return true;
 		case 2:
 			//Select A Category
-			selectACategory(path);
-			path = path + this->catName + "\\";
-			mType = menuType::NoteMenu;
+			if (selectACategory(path)) {
+				path = path + this->catName + "\\";
+				mType = menuType::NoteMenu;
+			}
 			return true;
 		case 3:
 			//Merge Categories
@@ -105,7 +106,7 @@ void CategoryMenu::createACategory(string username) {
 	
 }
 
-void CategoryMenu::selectACategory(string username) {
+bool CategoryMenu::selectACategory(string username) {
 
 	system("cls");
 
@@ -116,6 +117,7 @@ void CategoryMenu::selectACategory(string username) {
 			cout << "No Categories Exist!" << endl;
 			Sleep(1000);
 			catExists = false;
+			return catExists;
 		} else {
 
 			cout << "Please Select A Category:" << endl << endl;
@@ -135,7 +137,7 @@ void CategoryMenu::selectACategory(string username) {
 			} else {
 
 				this->catName = catList.at(userOption - 1);
-				break;
+				return catExists;
 			}
 
 		}
@@ -206,58 +208,52 @@ bool CategoryMenu::searchACategory(string username) {
 
 	do {
 
-		if (catList.empty()) {
+		cout << "Please enter a search word: " << endl << endl
+				<< ": ";
+		string userSearch;
+		cin >> userSearch;
+		checkValidInput();
+
+		vector<string> searchList;
+
+		for (auto currName = catList.begin(); currName != catList.end(); currName++) {
+
+			string tempCurrName = *currName;
+			convToUpper(tempCurrName);
+			string tempUserSearch = userSearch;
+			convToUpper(tempUserSearch);
+
+			if ((tempCurrName).find(tempUserSearch) != string::npos) {
+				searchList.push_back(*currName);
+			}
+		}
+
+		if (searchList.empty()) {
 			cout << endl << "No Categories Exist!" << endl;
 			Sleep(1000);
-			catExists = false;
+			return false;
 
 		} else {
+			cout << endl;
+			displayCatOptions(searchList);
 
-			cout << "Please enter a search word: " << endl << endl
-				 << ": ";
-			string userSearch;
-			cin >> userSearch;
+			cout << endl << ": ";
+			int userOption = 0;
+			cin >> userOption;
 			checkValidInput();
 
-			vector<string> searchList;
+			if (userOption == 0 || userOption > searchList.size()) {
 
-			for (auto currName = catList.begin(); currName != catList.end(); currName++) {
-
-				string tempCurrName = *currName;
-				convToUpper(tempCurrName);
-				string tempUserSearch = userSearch;
-				convToUpper(tempUserSearch);
-
-				if ((tempCurrName).find(tempUserSearch) != string::npos) {
-					searchList.push_back(*currName);
-				}
-			}
-
-			if (searchList.empty()) {
-				cout << endl << "No Categories Exist!" << endl;
+				system("cls");
+				cout << "Please enter a valid option..." << endl << endl;
 				Sleep(1000);
 				return false;
 
 			} else {
-				cout << endl;
-				displayCatOptions(searchList);
 
-				cout << endl << ": ";
-				int userOption = 0;
-				cin >> userOption;
-				checkValidInput();
+				this->catSearch = searchList.at(userOption - 1);
+				return true;
 
-				if (userOption == 0 || userOption > searchList.size()) {
-
-					system("cls");
-					cout << "Please enter valid options: " << endl << endl;
-
-				} else {
-
-					this->catSearch = searchList.at(userOption - 1);
-					return true;
-
-				}
 			}
 		}
 
@@ -298,7 +294,7 @@ void CategoryMenu::deleteACategory(string username) {
 				this->catDelete = username + catList.at(source - 1);
 
 				cout << "Are you sure you want to delete this Category and its contents? (Y/N)" << endl << endl
-					 << ":";
+					 << ": ";
 
 				if (checkYesNo()) {
 					if (Delete_Content_Category(this->catDelete)) {

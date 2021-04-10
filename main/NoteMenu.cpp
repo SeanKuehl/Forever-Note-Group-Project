@@ -39,9 +39,10 @@ bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
 			return true;
 		case 3:
 			//Search Existing Notes
-			searchANote(path);
-			path = path + this->noteName;
-			mType = menuType::NoteModificationMenu;
+			if (searchANote(path)) {
+				path = path + this->noteName;
+				mType = menuType::NoteModificationMenu;
+			}
 			return true;
 		case 4:
 			//Go Back
@@ -248,7 +249,9 @@ bool NoteMenu::searchANote(string path) {
 			if (userOption == 0 || userOption > searchList.size()) {
 
 				system("cls");
-				cout << "Please enter valid options: " << endl << endl;
+				cout << "Please enter a valid option..." << endl << endl;
+				Sleep(1000);
+				return false;
 
 			} else {
 
