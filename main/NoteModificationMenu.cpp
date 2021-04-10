@@ -21,51 +21,43 @@ void NoteModificationMenu::displayMenu() {
 
 bool NoteModificationMenu::checkMenuOption(string& path, menuType& mType) {
 
-	//this->currNote = Note::Open(path);
-
-	cout << endl << ":";
-	cin >> menuOption;
-	checkValidInput();
+	this->currNote = Note::Open(path);
+	
 	do {
+
+		cout << endl << ": ";
+		cin >> menuOption;
+		checkValidInput();
+
 		switch (menuOption) {
 		case 1:
 			//View Note
-			
 			displayNote();
-			
-			mType = menuType::NoteModificationMenu;
-			return true;
+			break;
 		case 2:
 			//Lock Note
-
-			lockNote();
-
-			mType = menuType::NoteModificationMenu;
-			return true;
+			lockNote(path);
+			break;
 		case 3:
 			//Unlock Note
-
 			unlockNote();
-			mType = menuType::NoteModificationMenu;
-			return true;
+			break;
 		case 4:
 			//Remove Note Password
 			removeNotePassword();
-			
-			mType = menuType::NoteModificationMenu;
-			return true;
+			break;
 		case 5:
 			//Edit Note
 			editNote();
-			
-			mType = menuType::NoteModificationMenu;
-			return true;
+			break;
 		case 6:
 			//Delete Note
-			deleteNote();
-			removeLastPathEntry(path);
-			mType = menuType::NoteMenu;
-			return true;
+			if (deleteNote()) {
+				removeLastPathEntry(path);
+				mType = menuType::NoteMenu;
+				return true;
+			}
+			break;
 		case 7:
 			//Go Back
 			removeLastPathEntry(path);
@@ -82,7 +74,11 @@ bool NoteModificationMenu::checkMenuOption(string& path, menuType& mType) {
 			checkValidInput();
 			break;
 		}
+		displayMessage();
+		displayMenu();
+
 	} while (true);
+
 }
 
 void NoteModificationMenu::displayNote() {
@@ -92,12 +88,13 @@ void NoteModificationMenu::displayNote() {
 	cout << "---View Note---" << endl << endl;
 
 	//print Note Here
-	string noteString = "hello my name is\nhi\ntestme\nbye";
+	string noteString;
 
-	//if(currNote.getContents(noteString) == passwordState::Locked){
-	if (!true) {
-		cout << "Note must be unlocked before it can be viewed!" << endl;
-		Sleep(1000);
+	if(currNote.GetContents(noteString) == PasswordState::Locked){
+	//if (!true) {
+		cout << "Note must be unlocked before it can be viewed!" << endl << endl
+			 << "Enter Any Key to continue...";
+		system("pause >nul");
 		return;
 	} else {
 		cout << noteString << endl << endl;
@@ -109,27 +106,37 @@ void NoteModificationMenu::displayNote() {
 
 }
 
-void NoteModificationMenu::lockNote() {
+void NoteModificationMenu::lockNote(string path) {
 
 	system("cls");
 
 	cout << "---Lock Note---" << endl << endl;
 
-	cout << "Please enter a new password: " << endl << endl;
-	cout << ": ";
-
-	string password;
-	cin >> password;
-	checkValidInput();
-
-	//if (currNote.setPassword(password)) {
-	if (true) {
-		cout << "Password was set successfully" << endl;
+	if (currNote.GetPasswordState() == PasswordState::Locked) {
+		cout << "Note must be unlocked before it can be edited!" << endl;
 		Sleep(1000);
+		return;
+
 	} else {
-		cout << "Password was NOT set successfully" << endl
-			 << "Returning to the menu" << endl;
-		Sleep(1000);
+
+		cout << "Please enter a new password: " << endl << endl;
+		cout << ": ";
+
+		string password;
+		cin >> password;
+		checkValidInput();
+
+		if (currNote.SetPassword(password) == PasswordState::None) {
+			cout << "Password was successfully Removed...";
+			Sleep(1000);
+		} else {
+			cout << "Password was successfully Changed" << endl
+				 << "Returning to the menu...";
+			Sleep(1000);
+		}
+
+		currNote.WritetoFile();
+
 	}
 
 }
@@ -147,13 +154,12 @@ void NoteModificationMenu::unlockNote() {
 	cin >> password;
 	checkValidInput();
 
-	//if (currNote.checkPassword(password) != passwordState::Locked) {
-	if (true) {
-		cout << "Note Unlocked Successfully" << endl;
+	if (currNote.CheckPassword(password) != PasswordState::Locked) {
+		cout << "Note Unlocked Successfully";
 		Sleep(1000);
 	} else {
 		cout << "Invalid Password" << endl
-			 << "Returning to the menu" << endl;
+			 << "Returning to the menu...";
 		Sleep(1000);
 	}
 
@@ -165,20 +171,27 @@ void NoteModificationMenu::removeNotePassword() {
 
 	cout << "---Remove Note Password---" << endl << endl;
 
+	cout << "Are you sure you want to remove the password? (Y/N)" << endl << endl
+		<< ": ";
+
 	if (checkYesNo()) {
-		//if (currNote.passwordState() == passwordState::Locked) {
-		if (!true) {
+		if (currNote.GetPasswordState() == PasswordState::Locked) {
 			cout << "Note must be unlocked before it can be edited!" << endl;
 			Sleep(1000);
 			return;
 		} else {
-			//currNote.setPassword("");
-			cout << "Password was removed successfully" << endl;
-			Sleep(1000);
+			if (currNote.SetPassword("") == PasswordState::None) {
+				cout << endl << "Password was removed successfully";
+				currNote.WritetoFile();
+				Sleep(1000);
+			} else {
+				cout << endl << "Password was NOT removed";
+				Sleep(1000);
+			}
 		}
 	} else {
-		cout << "Password removal aborted" << endl
-			 << "Returning to the menu" << endl;
+		cout << endl << "Password removal aborted" << endl
+			 << endl << "Returning to the menu...";
 		Sleep(1000);
 	}
 
@@ -190,8 +203,7 @@ void NoteModificationMenu::editNote() {
 
 	cout << "---Edit Note---" << endl << endl;
 
-	//if (currNote.passwordState() == passwordState::Locked) {
-	if (!true) {
+	if (currNote.GetPasswordState() == PasswordState::Locked) {
 		cout << "Note must be unlocked before it can be edited!" << endl;
 		Sleep(1000);
 		return;
@@ -200,31 +212,32 @@ void NoteModificationMenu::editNote() {
 		cout << "Please use the next window to edit the note." << endl << endl;
 		cout << "Make sure to SAVE (CTRL+S) before closing the window!" << endl;
 		Sleep(1000);
-		//currNote.Edit();
+		currNote.Edit();
 	}
 
 }
 
-void NoteModificationMenu::deleteNote() {
+bool NoteModificationMenu::deleteNote() {
 
 	system("cls");
 
-	//if (currNote.passwordState() == passwordState::Locked) {
-	if (!true) {
+	if (currNote.GetPasswordState() == PasswordState::Locked) {
 		cout << "Note must be unlocked before it can be deleted!" << endl;
 		Sleep(1000);
-		return;
+		return false;
 	} else {
 		//delete Note Here
 		cout << "Are you sure you want to delete this note? (Y/N)" << endl << endl
 			<< ": ";
 		if (checkYesNo()) {
-			//currNote.Delete();
+			currNote.Delete();
 			cout << endl << "Note was deleted" << endl;
 			Sleep(1000);
+			return true;
 		} else {
 			cout << endl << "Note deletion canceled" << endl;
 			Sleep(1000);
+			return false;
 		}
 	}
 }

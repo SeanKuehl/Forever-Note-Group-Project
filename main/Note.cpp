@@ -6,6 +6,7 @@
 #include <vector>
 #include "Note.h"
 #include "Windows.h"
+#include "Encryption.h"
 
 //private constants
 const string Note::tempFileName = "tmp.txt";
@@ -47,7 +48,7 @@ void Note::WritetoFile()
 			noteStrings.push_back(this->password);
 		}
 
-		vector<string> encryptedStrings = noteStrings;
+		//vector<string> encryptedStrings = noteStrings;
 		//encryptedStrings.push_back("!@#"); //remove this
 		vector<string> encryptedStrings = Encrypt(noteStrings);
 		string encrytionKey = encryptedStrings.back();
@@ -76,10 +77,10 @@ void Note::ReadNoteField(string temp, string& field, fstream& fileStream)
 			{
 				if (temp.substr(temp.length() - 2) == closingBrackets)
 				{
-					field += temp.substr(0, temp.length() - 2);
+					field += "\n" + temp.substr(0, temp.length() - 2);
 					break;
 				}
-				field += temp;
+				field += "\n" + temp;
 			}
 		}
 	}
@@ -106,7 +107,7 @@ PasswordState Note::GetPasswordState()
 	return this->passwordState;
 }
 
-void Note::SetPassword(string password)
+PasswordState Note::SetPassword(string password)
 {
 	this->password = password;
 	if (password != "")
@@ -119,6 +120,7 @@ void Note::SetPassword(string password)
 		this->isPasswordProtected = false;
 		this->passwordState = PasswordState::None;
 	}
+	return this->passwordState;
 }
 
 Note Note::Open(string filePath)
@@ -182,6 +184,7 @@ Note Note::Open(string filePath)
 		if (decryptedStrings.size() > 2)
 		{
 			newNote = Note(decryptedStrings[0], decryptedStrings[1], decryptedStrings[2]);
+			newNote.passwordState = PasswordState::Locked;
 		}
 		else
 		{
@@ -250,9 +253,9 @@ void Note::Edit()
 		string concatStr = "";
 		while (getline(fileStream, inBuff))
 		{
-			concatStr += inBuff;
+			concatStr += inBuff + "\n";
 		}
-		this->contents = concatStr;
+		this->contents = concatStr.substr(0, concatStr.length() - 1);
 	}
 	fileStream.close();
 	remove(tempFileName.c_str());

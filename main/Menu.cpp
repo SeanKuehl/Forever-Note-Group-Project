@@ -88,17 +88,16 @@ bool Menu::checkYesNo() {
 		convToUpper(userInput);
 
 		//bug here
-
-		if (userInput.find("NO") != string::npos) {
+		if(userInput.compare("NO") == 0 || userInput.compare("N") == 0) {
 			yesNo = false;
 			validInput = true;
-		} else if (userInput.find("YES") != string::npos) {
-			cout << "Your Input Was Invalid" << endl << endl
-				 << "Please Enter Yes or No (Y/N): ";
-			validInput = false;
-		} else {
+		} else if (userInput.compare("YES") == 0 || userInput.compare("Y") == 0) {
 			yesNo = true;
 			validInput = true;
+		} else {
+			cout << "Your Input Was Invalid" << endl << endl
+				<< "Please Enter Yes or No (Y/N): ";
+			validInput = false;
 		}
 
 	} while (!validInput);
@@ -107,6 +106,12 @@ bool Menu::checkYesNo() {
 }
 
 void Menu::removeLastPathEntry(string& path) {
-	int firstindexOfSlash = path.find_first_of("\\");
-	path = path.substr(0, firstindexOfSlash + 1);
+	int lastindexOfSlash = path.find_last_of("\\");
+	if (path.length() == lastindexOfSlash + 1) {
+		path = path.substr(0, lastindexOfSlash);
+		removeLastPathEntry(path);
+	} else {
+		path = path.substr(0, lastindexOfSlash + 1);
+	}
+	
 }

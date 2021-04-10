@@ -5,11 +5,12 @@
 #include <Windows.h>
 #include <stdio.h>
 #include <conio.h>
+#include "Note.h"
 
 using namespace std;
 
 class NoteModificationMenu : public Menu {
-	//Note currNote;
+	Note currNote;
 public:
 	NoteModificationMenu();
 	void displayMessage() override;
@@ -17,9 +18,9 @@ public:
 	bool checkMenuOption(string&, menuType&) override;
 private:
 	void displayNote();
-	void lockNote();
+	void lockNote(string);
 	void unlockNote();
 	void removeNotePassword();
 	void editNote();
-	void deleteNote();
+	bool deleteNote();
 };

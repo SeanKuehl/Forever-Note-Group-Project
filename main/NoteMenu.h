@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include <sstream>
 #include "Category.h"
+#include "Note.h"
 
 using namespace std;
 

@@ -21,7 +21,7 @@ private:
 	static const char encryptionChar;
 
 	void SetPath(string);
-	void WritetoFile();
+	//void WritetoFile();
 	static void ReadNoteField(string, string&, fstream&);
 
 public:
@@ -70,7 +70,7 @@ public:
 	/// Set the password
 	/// </summary>
 	/// <param name="password"></param>
-	void SetPassword(string);
+	PasswordState SetPassword(string);
 	
 	/// <summary>
 	/// Opens the given file and returns the Note read from file
@@ -84,6 +84,7 @@ public:
 	/// </summary>
 	/// <param name="directoryPath"></param>
 	void WritetoFile(string);
+	void WritetoFile();
 	/// <summary>
 	/// Open the contents of a Note in a text editor
 	/// </summary>

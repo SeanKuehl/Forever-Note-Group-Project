@@ -34,11 +34,13 @@ bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
 		case 2:
 			//Select A Note
 			selectANote(path);
+			path = path + this->noteName;
 			mType = menuType::NoteModificationMenu;
 			return true;
 		case 3:
 			//Search Existing Notes
 			searchANote(path);
+			path = path + this->noteName;
 			mType = menuType::NoteModificationMenu;
 			return true;
 		case 4:
@@ -68,7 +70,10 @@ void NoteMenu::createANote(string path) {
 		
 	cout << "What would you like to name your note?" << endl << endl
 		<< ": ";
-	cin >> noteName;
+	do {
+		getline(cin, noteName);
+	} while (noteName.length() <= 0);
+
 	checkValidInput();
 
 	if (!checkCharacters(noteName)) {
@@ -92,17 +97,18 @@ void NoteMenu::createANote(string path) {
 			cout << "Please Enter a Password (No Spaces):" << endl << endl
 				<< ": ";
 			cin >> password;
+			this->password = password;
 			checkValidInput();
 			if (password.size() > 0) {
-				//Note(noteName, contents, password);
-				//writeToFile();
+				Note tempNote = Note(this->noteName, this->noteContent, this->password);
+				tempNote.WritetoFile(path);
 				break;
 			} else {
 				cout << "Invalid Password" << endl << endl;
 			}
 		} else {
-			//Note(noteName, contents);
-			//writeToFile();
+			Note tempNote = Note(this->noteName, this->noteContent);
+			tempNote.WritetoFile(path);
 			break;
 		}
 	} while (true);
@@ -155,9 +161,8 @@ void NoteMenu::displayNoteOptions(string path, vector<string> noteList) {
 
 	int counter = 1;
 	for (auto currName = noteList.begin(); currName != noteList.end(); currName++) {
-		//Note currNote = Note.Open( path + *currName + ".note");
-		//cout << counter << ") " << currNote.getTitle() << endl;
-		cout << counter << ") " << *currName << endl;
+		Note currNote = Note::Open( path + *currName);
+		cout << counter << ") " << currNote.GetTitle() << endl;
 		counter++;
 	}
 }
@@ -215,9 +220,8 @@ bool NoteMenu::searchANote(string path) {
 		vector<string> searchList;
 
 		for (auto currName = noteList.begin(); currName != noteList.end(); currName++) {
-			//Note currNote = Note.Open( path + *currName + ".note");
-			//string tempCurrName = currNote.getTitle();
-			string tempCurrName = *currName;
+			Note currNote = Note::Open(path + *currName);
+			string tempCurrName = currNote.GetTitle();
 			convToUpper(tempCurrName);
 			string tempUserSearch = userSearch;
 			convToUpper(tempUserSearch);
