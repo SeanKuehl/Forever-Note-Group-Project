@@ -1,41 +1,34 @@
+
+#include "Menu.h"
+#include "Login.h"
+#include "Navigation.h"
+#include "menuType.h"
 #include <iostream>
-#include <vector>
-#include "Note.h"
+
+
+using namespace std;
 
 int main() {
-	Note note = Note("New title", "contents", "pa$$");
-	string someString;
+	Menu* m = new Menu;
+	menuType mType = menuType::mMenu;
+	string path = "";
 
-	std::cout << note.GetTitle() << std::endl;
-	note.GetContents(someString);
-	std::cout << someString << std::endl;
+	m->displayMessage();
+	m->displayMenu();
+	m->checkMenuOption(path, mType);
 
-	note.WritetoFile("C:\\Users\\Kevin\\Documents\\Schooling\\College 2\\Classes\\Semester 2\\CSCN71030-Proj2-Team Based Software");
-	note.Delete();
+	do {
+		selectMenu(mType, &m);
+		m->displayMessage();
+		m->displayMenu();
 
+		if (!(m->checkMenuOption(path, mType))) {
+			exitApplication(m);
+		}
 
+	} while (true);
 
-	string path = "C:\\Users\\Kevin\\Documents\\Schooling\\College 2\\Classes\\Semester 2\\CSCN71030-Proj2-Team Based Software\\test.note";
-	note = Note::Open(path);
-
-	vector<string> strings;
-
-	std::cout << note.GetTitle() << std::endl;
-	strings.push_back(someString);
-	note.GetContents(someString);
-	std::cout << someString << std::endl;
-	strings.push_back(someString);
-
-	cout << "vector: ";
-	for (std::vector<string>::iterator i = strings.begin(); i != strings.end(); i++)
-	{
-		cout << *i << " ";
-	}
-	cout << endl;
-
-	note.Edit();
-	note.GetContents(someString);
-	std::cout << someString << std::endl;
 
 	return 0;
+
 }
