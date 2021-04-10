@@ -15,13 +15,12 @@ void NoteMenu::displayMenu() {
 		 << "4) Go Back" << endl
 		 << "5) Exit" << endl;
 
-	this->noteList.push_back("pizza");
-	this->noteList.push_back("soup");
-	this->noteList.push_back("sauce");
-
 }
 
 bool NoteMenu::checkMenuOption(string& path, menuType& mType) {
+
+	this->noteList = List_CAT(path);
+
 	cout << endl << ": ";
 	cin >> menuOption;
 	checkValidInput();

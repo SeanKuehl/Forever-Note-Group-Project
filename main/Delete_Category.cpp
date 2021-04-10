@@ -22,23 +22,18 @@ bool Delete_Category(string Path)                // CPP FUNCTION FOR DELETING A 
 
 bool Delete_Content_Category(string Path)
 {
-    char Inp;   // Doubt PART
-    cin >> Inp;
-    if (confirm(Inp) == 1)
+    string DelPath = "RMDIR /Q/S " + Path;
+    const char* Del_Path = DelPath.c_str();
+    system(Del_Path);
+    if (!Check_Category(Del_Path))
     {
-        string DelPath = "RMDIR /Q/S " + Path;
-        const char* Del_Path = DelPath.c_str();
-        system(Del_Path);
-        if (!Check_Category(Del_Path))
-        {
-            //cout << "Folder " << Name << " Deleted Successfully.";
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return true;
     }
+    else
+    {
+        return false;
+    }
+    
 }
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

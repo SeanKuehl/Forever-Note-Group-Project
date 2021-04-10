@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <Windows.h>
 #include "ListAllInDirectory.h"
+#include "Category.h"
 
 using namespace std;
 

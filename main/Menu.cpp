@@ -107,6 +107,6 @@ bool Menu::checkYesNo() {
 }
 
 void Menu::removeLastPathEntry(string& path) {
-	int firstindexOfSlash = path.find_first_of("/");
+	int firstindexOfSlash = path.find_first_of("\\");
 	path = path.substr(0, firstindexOfSlash + 1);
 }

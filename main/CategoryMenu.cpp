@@ -16,12 +16,6 @@ void CategoryMenu::displayMenu() {
 		 << "5) Delete A Category" << endl
 		 << "6) Exit" << endl;
 
-	/*this->catList.push_back("Cookies");
-	this->catList.push_back("Dating");
-	this->catList.push_back("Fun");
-	this->catList.push_back("Cooking");
-	this->catList.push_back("Other");*/
-
 }
 
 bool CategoryMenu::checkMenuOption(string& path, menuType& mType) {
@@ -36,13 +30,13 @@ bool CategoryMenu::checkMenuOption(string& path, menuType& mType) {
 		case 1:
 			//Create A Category
 			createACategory(path);
-			path = path + this->catName + "/";
+			path = path + this->catName + "\\";
 			mType = menuType::NoteMenu;
 			return true;
 		case 2:
 			//Select A Category
 			selectACategory(path);
-			path = path + this->catName + "/";
+			path = path + this->catName + "\\";
 			mType = menuType::NoteMenu;
 			return true;
 		case 3:
@@ -52,7 +46,7 @@ bool CategoryMenu::checkMenuOption(string& path, menuType& mType) {
 		case 4:
 			//Search Existing Categories
 			if (searchACategory(path)) {
-				path = path + this->catSearch + "/";
+				path = path + this->catSearch + "\\";
 				mType = menuType::NoteMenu;
 			}
 			return true;
@@ -101,11 +95,13 @@ void CategoryMenu::createACategory(string username) {
 
 	this->catName = categoryName;
 
-	/*if (Create_Category(username, categoryName)) {
-		cout << "Category creation was successful" << endl;
+	if (Create_Category(username, categoryName)) {
+		cout << endl << "Category creation was successful";
+		Sleep(1000);
 	} else {
-		cout << "Category creation was NOT successful" << endl;
-	}*/
+		cout << endl << "Category creation was NOT successful";
+		Sleep(1000);
+	}
 	
 }
 
@@ -185,13 +181,14 @@ void CategoryMenu::mergeACategory(string username) {
 				this->source = username + catList.at(source - 1);
 				this->destination = username + catList.at(destination - 1);
 
-				/*if (mergeCategories(this->source, this->destination)) {
-					Sleep(1000);
+				if (Merge_Category(this->source, this->destination)) {
+					
 					cout << "Merging Successful!" << endl;
-				} else {
 					Sleep(1000);
+				} else {
 					cout << "Merging Was NOT Successful!" << endl;
-				}*/
+					Sleep(1000);
+				}
 				break;
 
 			}
@@ -300,11 +297,22 @@ void CategoryMenu::deleteACategory(string username) {
 
 				this->catDelete = username + catList.at(source - 1);
 
-				/*if (deleteCategory(this->catDelete)) {
-					cout << "Deleting Successful!" << endl;
+				cout << "Are you sure you want to delete this Category and its contents? (Y/N)" << endl << endl
+					 << ":";
+
+				if (checkYesNo()) {
+					if (Delete_Content_Category(this->catDelete)) {
+						cout << endl << "Deleting Successful!";
+						Sleep(1000);
+					} else {
+						cout << endl << "Deleting Was NOT Successful!";
+						Sleep(1000);
+					}
 				} else {
-					cout << "Deleting Was NOT Successful!" << endl;
-				}*/
+					cout << endl << "Deleting Was Aborted";
+					Sleep(1000);
+				}
+
 				break;
 			}
 		}

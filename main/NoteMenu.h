@@ -5,6 +5,7 @@
 #include <vector>
 #include <Windows.h>
 #include <sstream>
+#include "Category.h"
 
 using namespace std;
 

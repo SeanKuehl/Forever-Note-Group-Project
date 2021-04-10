@@ -5,7 +5,7 @@
 
 vector<string> List_CAT(string path) {
 
-    int Len = path.size() + 1;
+    int Len = path.size();
 
     vector<string> Return_Vector;
 
@@ -18,7 +18,6 @@ vector<string> List_CAT(string path) {
         fileName = fileName.substr(Len);
 
         Return_Vector.push_back(fileName);
-
 
     }
 

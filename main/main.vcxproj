@@ -156,7 +156,6 @@
     <ClCompile Include="Create_Category.cpp" />
     <ClCompile Include="Delete_Category.cpp" />
     <ClCompile Include="List_Category.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Merge_Category.cpp" />
     <ClCompile Include="Support_Functions.cpp" />
   </ItemGroup>
