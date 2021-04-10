@@ -5,11 +5,10 @@
 #include "menuType.h"
 #include <iostream>
 
+
 using namespace std;
 
 int main() {
-
-
 	Menu* m = new Menu;
 	menuType mType = menuType::mMenu;
 	string path = "";
@@ -28,6 +27,7 @@ int main() {
 		}
 
 	} while (true);
+
 
 	return 0;
 
