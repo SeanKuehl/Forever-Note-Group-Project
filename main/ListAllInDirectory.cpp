@@ -30,7 +30,8 @@ string get_current_dir() {
 
 vector<string> GetCategoriesInDirectory(string path) {
 
-    int pathLength = path.size() + 1;   //if I don't add the +1 it'll keep the last slash
+    //Islam Removed + 1 because it took the first character from the output
+    int pathLength = path.size();   //if I don't add the +1 it'll keep the last slash 
     vector<string> toReturn;
 
     fs::path pathToShow(path);
@@ -45,7 +46,7 @@ vector<string> GetCategoriesInDirectory(string path) {
             //it's a file and a '.' was found
         }
         else {
-            //it's a categoriy and a '.' was not found
+            //it's a category and a '.' was not found
 
             toReturn.push_back(fileName);
         }

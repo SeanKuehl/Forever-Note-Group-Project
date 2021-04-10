@@ -21,15 +21,18 @@ void Login::displayMenu() {
 	cin >> this->password;
 	checkValidInput();
 
-	/*if (LogIntoAccount(this->username, this->password)) {
+	if (LogIntoAccount(this->username, this->password)) {
+		cout << endl << "Logging in...";
+		Sleep(1000);
+
 		return;
 	} else {
-		system("cls");
-		cout << "This Account Does Not Exist!" << endl << endl;
+		cout << endl << "This Account Does Not Exist!"
+			 << endl << "Please Try Again!";
 		Sleep(1000);
 		displayMessage();
 		displayMenu();
-	}*/
+	}
 
 }
 

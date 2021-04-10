@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <Windows.h>
+#include "ListAllInDirectory.h"
 
 using namespace std;
 

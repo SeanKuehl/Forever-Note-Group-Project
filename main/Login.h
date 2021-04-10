@@ -2,6 +2,8 @@
 #include "Menu.h"
 #include <iostream>
 #include <string>
+#include "LogIntoAccount.h"
+#include <Windows.h>
 using namespace std;
 
 class Login: public Menu {

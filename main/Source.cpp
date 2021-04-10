@@ -29,16 +29,6 @@ int main() {
 
 	} while (true);
 
-
-	//#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-	//#include <experimental/filesystem>
-	//it said there was a way to do it with just filesystem but I couldn't get it to work
-	//this works!
-	//std::experimental::filesystem::remove("hello");
-	
-	//this only works for empty directories which is fine because that's all they'll be for testing
-	
-	
 	return 0;
 
 }

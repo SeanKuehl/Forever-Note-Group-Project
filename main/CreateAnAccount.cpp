@@ -11,6 +11,7 @@ void CreateAnAccount::displayMessage() {
 }
 
 void CreateAnAccount::displayMenu() {
+
 	string username;
 	string reUsername;
 	string password;
@@ -60,14 +61,17 @@ void CreateAnAccount::displayMenu() {
 		return;
 	}
 
-	/*if (CreateAccount(this->username, this->password)) {
-		cout << "Account Creation Was Successful!" << endl;
+	if (CreateAccount(this->username, this->password)) {
+		cout << endl << "Account Creation Was Successful!";
+		Sleep(1000);
 	} else {
+		cout << endl << "Username Already Exists!" << endl
+			 << "Account Creation Was NOT Successful...";
+		Sleep(1000);
 		system("cls");
-		cout << "Username Already Exists!" << endl
-			 << "Account Creation Was NOT Successful!" <<  endl;
-			 displayMenu();
-	}*/
+		displayMessage();
+		displayMenu();
+	}
 
 }
 

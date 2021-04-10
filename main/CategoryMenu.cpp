@@ -16,17 +16,17 @@ void CategoryMenu::displayMenu() {
 		 << "5) Delete A Category" << endl
 		 << "6) Exit" << endl;
 
-	//this->catList = listCategories(username);
-
-	this->catList.push_back("Cookies");
+	/*this->catList.push_back("Cookies");
 	this->catList.push_back("Dating");
 	this->catList.push_back("Fun");
 	this->catList.push_back("Cooking");
-	this->catList.push_back("Other");
+	this->catList.push_back("Other");*/
 
 }
 
 bool CategoryMenu::checkMenuOption(string& path, menuType& mType) {
+
+	this->catList = GetCategoriesInDirectory(path);
 
 	cout << endl << ":";
 	cin >> menuOption;
