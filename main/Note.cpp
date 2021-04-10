@@ -48,8 +48,8 @@ void Note::WritetoFile()
 		}
 
 		vector<string> encryptedStrings = noteStrings;
-		encryptedStrings.push_back("!@#"); //remove this
-		//vector<string> encryptedStrings = Encrypt(noteStrings);
+		//encryptedStrings.push_back("!@#"); //remove this
+		vector<string> encryptedStrings = Encrypt(noteStrings);
 		string encrytionKey = encryptedStrings.back();
 		fileStream << "#" << encrytionKey << endl;
 		for (vector<string>::iterator i = encryptedStrings.begin(); i != encryptedStrings.end() - 1; i++)
@@ -177,8 +177,8 @@ Note Note::Open(string filePath)
 	if (encryptionKey != "")
 	{
 		readStrings.push_back(encryptionKey);
-		vector<string> decryptedStrings = readStrings;
-		//vector<string> decryptedStrings = Decrypt(readStrings);
+		//vector<string> decryptedStrings = readStrings;
+		vector<string> decryptedStrings = Decrypt(readStrings);
 		if (decryptedStrings.size() > 2)
 		{
 			newNote = Note(decryptedStrings[0], decryptedStrings[1], decryptedStrings[2]);
