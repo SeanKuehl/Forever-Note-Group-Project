@@ -139,6 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+
+    <ClCompile Include="CreateAccount.cpp" />
+    <ClCompile Include="Encryption.cpp" />
+    <ClCompile Include="ListAllInDirectory.cpp" />
+    <ClCompile Include="LogIntoAccount.cpp" />
+    <ClCompile Include="Password.cpp" />
     <ClCompile Include="CategoryMenu.cpp" />
     <ClCompile Include="CreateAnAccount.cpp" />
     <ClCompile Include="Login.cpp" />
@@ -149,6 +155,11 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CreateAccount.h" />
+    <ClInclude Include="Encryption.h" />
+    <ClInclude Include="ListAllInDirectory.h" />
+    <ClInclude Include="LogIntoAccount.h" />
+    <ClInclude Include="Password.h" />
     <ClInclude Include="CategoryMenu.h" />
     <ClInclude Include="CreateAnAccount.h" />
     <ClInclude Include="Login.h" />
@@ -157,6 +168,11 @@
     <ClInclude Include="Navigation.h" />
     <ClInclude Include="NoteMenu.h" />
     <ClInclude Include="NoteModificationMenu.h" />
+
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="AccountDatabase.txt" />
+    <Text Include="TestDatabase.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
