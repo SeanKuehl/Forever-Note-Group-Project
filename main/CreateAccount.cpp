@@ -113,7 +113,7 @@ bool TestCreateAccount(string userName, string password) {
 		fileData.push_back(password);
 
 		fileData = Encrypt(fileData);
-
+		
 		ofstream MyFile(TEST_FILE);
 
 		// Write to the file

@@ -10,7 +10,8 @@
 #include <vector>
 #include <time.h>
 
-#define PRINTABLES_LIST_SIZE 96 //was 95 but now + \n
+#define PRINTABLES_LIST_SIZE 95 //was 95 but now + \n
+//this is for testing, if including /n put as 96
 
 using namespace std;
 //https://stackoverflow.com/questions/27054414/printing-all-the-ascii-values-in-c-c/27054451
@@ -38,6 +39,9 @@ vector<string> Encrypt(vector<string> message) {
 	//this will return the encrypted message with the bit flipped key as the last item 
 	vector<char> printables = MakePrintableCharactersList();
 	srand(time(NULL));
+	//this is only for sean's brief testing
+	//int shift = 12; this test makes the cases fail
+	//this is the original and should be put back after testing
 	int shift = rand() % printables.size() + 1;
 	vector<string> toReturn = EncryptList(message, printables, shift);
 
@@ -96,6 +100,8 @@ string EncryptLine(string fun, vector<char> printablesList, int shift) {
 
 }
 
+
+
 vector<string> EncryptList(vector<string> lineList, vector<char> pList, int shift) {
 	//this but return the list of encrypted lines and add a line that is the seed/shift value on the end. Make sure to encrypt it with the binary rubbish!
 	vector<string> toReturn;
@@ -115,7 +121,7 @@ vector<char> MakePrintableCharactersList() {
 			toReturn.push_back(char(a));
 		}
 	}
-	toReturn.push_back('\n');	//since user will be inputting from console, we decided we needed this character
+	//toReturn.push_back('\n');	//since user will be inputting from console, we decided we needed this character
 
 
 

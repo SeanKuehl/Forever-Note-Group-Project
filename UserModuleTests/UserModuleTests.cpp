@@ -400,7 +400,7 @@ namespace UserModuleTests
 
 		TEST_METHOD(T018_TestCreateAccount_original_x________true)
 		{
-			//it should recognize this account as a duplicate
+			//it should recognize this account as new
 			//arrange, act, assert
 			ClearFileForTesting();
 			PutInfoOnTestingFile();	//puts {"testaccount", "1234", "othertest", "password"} on the file;
@@ -422,7 +422,7 @@ namespace UserModuleTests
 
 		TEST_METHOD(T019_TestCreateAccount_newaccount_x________true)
 		{
-			//it should recognize this account as a duplicate
+			//it should recognize this account as new
 			//arrange, act, assert
 			ClearFileForTesting();
 			PutInfoOnTestingFile();	//puts {"testaccount", "1234", "othertest", "password"} on the file;
