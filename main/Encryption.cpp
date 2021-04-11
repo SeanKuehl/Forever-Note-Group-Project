@@ -79,11 +79,13 @@ string EncryptLine(string fun, vector<char> printablesList, int shift) {
 	//maybe keep this func mostly in tact and call this for each string in the string list 
 	string toReturn = "";
 	int charIndex = 0;
+	bool thisCharIsPrintable = false;
 	for (int k = 0; k < fun.size(); k++) {
 		for (int i = 0; i < printablesList.size(); i++) {
 			if (fun.at(k) == printablesList.at(i)) {
 				charIndex = i;
 				charIndex += shift;
+				thisCharIsPrintable = true;
 
 				if (charIndex >= PRINTABLES_LIST_SIZE) {
 					//if the list index + shift is outside of list range, 
@@ -95,6 +97,14 @@ string EncryptLine(string fun, vector<char> printablesList, int shift) {
 				break;
 			}
 		}
+		if (thisCharIsPrintable) {
+			thisCharIsPrintable = false;
+		}
+		else {
+			toReturn += fun.at(k);	//this will add the character to the output even if it's not encrypted, this happens in cases like the \n
+
+		}
+
 	}
 	return toReturn;
 
@@ -132,11 +142,13 @@ string DecryptLine(string fun, vector<char> printablesList, int shift) {
 	string toReturn = "";
 	//cout << fun.size() << ", " << shift << ", " << printablesList.size() << endl;
 	int charIndex = 0;
+	bool isPrintableChar = false;
 	for (int k = 0; k < fun.size(); k++) {
 		for (int i = 0; i < printablesList.size(); i++) {
 			if (fun.at(k) == printablesList.at(i)) {
 				charIndex = i;
 				charIndex -= shift;
+				isPrintableChar = true;
 
 				if (charIndex < 0) {
 					//if the list index + shift is outside of list range, 
@@ -151,6 +163,12 @@ string DecryptLine(string fun, vector<char> printablesList, int shift) {
 				toReturn += printablesList.at(charIndex);
 				break;
 			}
+		}
+		if (isPrintableChar) {
+			isPrintableChar = false;
+		}
+		else {
+			toReturn += fun.at(k);	//this will add the character to the output even if it's not encrypted, this happens in cases like the \n
 		}
 	}
 	return toReturn;
