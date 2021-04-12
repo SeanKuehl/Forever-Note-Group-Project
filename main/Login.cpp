@@ -12,7 +12,9 @@ void Login::displayMessage() {
 
 void Login::displayMenu() {
 
-	bool credExists = false;
+}
+
+bool Login::checkMenuOption(string& path, menuType& mType) {
 
 	cout << "Username: ";
 	cin >> this->username;
@@ -24,21 +26,23 @@ void Login::displayMenu() {
 	if (LogIntoAccount(this->username, this->password)) {
 		cout << endl << "Logging in...";
 		Sleep(1000);
+		path = this->username + "\\";
+		mType = menuType::CategoryMenu;
+		return true;
 
-		return;
 	} else {
 		cout << endl << "This Account Does Not Exist!"
-			 << endl << "Please Try Again!";
-		Sleep(1000);
-		displayMessage();
-		displayMenu();
+			<< endl << "Would You like to Try Again? (Y/N)" << endl
+			<< endl << ": ";
+		if (checkYesNo()) {
+			system("cls");
+			displayMessage();
+			displayMenu();
+		} else {
+			system("cls");
+			mType = menuType::mMenu;
+		}
 	}
-
-}
-
-bool Login::checkMenuOption(string& path, menuType& mType) {
-	path = this->username + "\\";
-	mType = menuType::CategoryMenu;
 	return true;
 }
 

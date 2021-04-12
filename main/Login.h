@@ -9,6 +9,7 @@ using namespace std;
 class Login: public Menu {
 	string username;
 	string password;
+	bool validAccount;
 public:
 	Login();
 	void displayMessage() override;
