@@ -207,7 +207,7 @@ namespace UserModuleTests
 		{
 			//arrange, act, assert
 			string inputPassword = "secret";
-			string expected = "'yw&y(";
+			string expected = "(yw'y)";
 			vector<string> actual;
 			vector<string> inputMessage = { "hello", "there" };
 			//password shift is automatically 20
@@ -226,7 +226,7 @@ namespace UserModuleTests
 																		
 			//arrange, act, assert
 			string inputPassword = "password1234!?*&";
-			string expected = "$u''+#&xEFGH5S>:";
+			string expected = "%u((,$'xEFGH5S>:";
 			vector<string> actual;
 			vector<string> inputMessage = { "hello", "there" };
 			//password shift is automatically 20
@@ -253,7 +253,7 @@ namespace UserModuleTests
 
 			//arrange, act, assert
 			
-			string expected = "password1234!?*&";
+			string expected = "oarrvnqd1234!?*&";
 			vector<string> actual;
 			vector<string> inputMessage = { "##########", "$u''+#&xEFGH5S>:", "gdkkn~sgdqd~rhqd", "axd~l`&`l", "`kk~`qntmc~sgd~vnqkc", "161" };
 			//password shift is automatically 20
@@ -280,7 +280,7 @@ namespace UserModuleTests
 
 			//arrange, act, assert
 
-			string expected = "secret";
+			string expected = "recqes";
 			vector<string> actual;
 			vector<string> inputMessage = { "##########", "'yw&y(", "gdkkn~sgdqd~rhqd", "axd~l`&`l", "`kk~`qntmc~sgd~vnqkc", "161" };
 			//password shift is automatically 20
