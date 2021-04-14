@@ -5,7 +5,7 @@ Menu::Menu() {
 }
 
 void Menu::displayMessage() {
-	cout << "Welcome to Forever Note" << endl << endl;
+	cout << "---Main Menu---" << endl << endl;
 }
 
 void Menu::displayMenu() {
